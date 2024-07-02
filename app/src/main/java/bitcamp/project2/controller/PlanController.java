@@ -1,5 +1,6 @@
 package bitcamp.project2.controller;
 
+import bitcamp.project2.util.Menu;
 import bitcamp.project2.util.Prompt;
 import bitcamp.project2.vo.Plan;
 
@@ -13,6 +14,29 @@ import java.util.regex.Pattern;
 
 public class PlanController {
     LinkedList<Plan> planList = new LinkedList<>();
+
+    ///////////////////////////////////////////////////////////
+    ////////////////////// getInstance() //////////////////////
+    ///////////////////////////////////////////////////////////
+    private static PlanController m;
+
+    // setup Menu Instance
+    public static PlanController getInstance() {
+
+        if (m == null) {
+            m = new PlanController();
+        }
+
+        return m;
+    }// Method getInstance END
+
+    // reset PlanController Instance
+    public static void freeInstance() {
+        m = null;
+    }// Method freeInstance END
+
+
+
 
     public void executePlanCommand(String subMenuNo) { // 나중에 title로 수정
         switch(subMenuNo) {

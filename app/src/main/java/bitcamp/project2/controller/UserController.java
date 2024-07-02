@@ -9,6 +9,29 @@ import java.util.LinkedList;
 public class UserController {
     LinkedList<User> userList = new LinkedList<>();
 
+    ///////////////////////////////////////////////////////////
+    ////////////////////// getInstance() //////////////////////
+    ///////////////////////////////////////////////////////////
+    private static UserController m;
+
+    // setup Menu Instance
+    public static UserController getInstance() {
+
+        if (m == null) {
+            m = new UserController();
+        }
+
+        return m;
+    }// Method getInstance END
+
+    // reset UserController Instance
+    public static void freeInstance() {
+        m = null;
+    }// Method freeInstance END
+
+
+
+
     public void executeUserCommand(String subMenuNo) { // 나중에 title로 수정
         switch(subMenuNo) {
             case "1" :

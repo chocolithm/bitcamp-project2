@@ -107,7 +107,8 @@ public class Menu {
 
     private String printMainMenuList(){
         String str = "";
-        
+
+
         str += "[1] 내 일정        [2] 약속 추가       [3] 사용자관리       [0] 종료\n";
         
         
