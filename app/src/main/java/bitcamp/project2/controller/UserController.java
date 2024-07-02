@@ -23,6 +23,16 @@ public class UserController {
         }
     }
 
+    public void addUser() {
+        User user = new User();
+
+        user.setName(Prompt.input("ID? "));
+        user.setPassword(Prompt.input("PW? "));
+
+        userList.add(user);
+        System.out.println("등록되었습니다.");
+    }
+
     public void listUser() {
         String line = "--------------------------";
 
