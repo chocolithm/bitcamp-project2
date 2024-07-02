@@ -8,6 +8,6 @@ import bitcamp.project2.util.Prompt;
 public class App {
 
     public static void main(String[] args) {
-        
+
     }
 }
