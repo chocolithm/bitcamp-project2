@@ -62,8 +62,6 @@ public class Membership {
         this.bufUserList.add(bufuser);
         /***********************************/
 
-
-        System.out.print(membershipGuide());
         membershipMenu();
     }
 
@@ -82,18 +80,22 @@ public class Membership {
         String ans = ""; // user answer
         
         for (;;) {
+            System.out.print(membershipGuide());
             System.out.print("\n메인 : ");
             ans = sc.nextLine();
 
             switch (ans){
                 case "1": //login
-                    login();
-                    break;
+                    if(login()){
+                       return;
+                    }else{
+                        continue;
+                    }
                 case "2": //join
                     /////////////////////////////////////////////////////////
                     break;
                 default:
-                    System.out.println("\n[ERROR] 잘못된 입력입니다. 다시 입력해주세요.");
+                    System.out.print("\n[ERROR] 잘못된 입력입니다. 다시 입력해주세요.\n\n");
             }
         }
     }//Method Menu END
@@ -112,7 +114,7 @@ public class Membership {
             pw = sc.nextLine();
             if(EqualUserPW(pw)){
                 this.password = pw;
-                System.out.print("로그인 되었습니다.\n");
+                System.out.print("로그인 되었습니다.\n\n");
                 return true;
             }
 
@@ -120,7 +122,7 @@ public class Membership {
 
         this.name = "";
         this.password = "";
-        System.out.print("ID PW를 다시 확인해주세요.\n");
+        System.out.print("ID PW를 다시 확인해주세요.\n\n");
         return false;
     }//Method login END
 
