@@ -3,6 +3,7 @@
  */
 package bitcamp.project2;
 
+import bitcamp.project2.util.Membership;
 import bitcamp.project2.controller.PlanController;
 import bitcamp.project2.controller.UserController;
 import bitcamp.project2.util.Prompt;
@@ -21,6 +22,10 @@ public class App {
     PlanController planController = new PlanController();
 
     public static void main(String[] args) {
+
+        Membership m = Membership.getInstance();
+        m.menu();
+
         new App().execute();
     }
 
@@ -54,11 +59,9 @@ public class App {
                 System.out.println("비밀번호가 잘못되었습니다.");
             } else {
                 System.out.println("[사용자관리 화면에 접속합니다.]");
-
-                String menuTitle = "사용자관리";
-
                 while (true) {
                     userController.listUser();
+                    String menuTitle = "사용자관리";
 
                     String[] menus = subMenus[ans - 1];
                     for (int i = 0; i < menus.length; i++) {
@@ -67,11 +70,11 @@ public class App {
                     System.out.println("[0] 이전");
 
                     String command = Prompt.input(String.format("메인/%s>", menuTitle));
-                    if(command.equals("0")) {
+                    if (command.equals("0")) {
                         break;
                     }
 
-                    userController.executeUserCommand(command);
+                    planController.executePlanCommand(command);
                 }
             }
         }
