@@ -1,5 +1,7 @@
 package bitcamp.project2.util;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Prompt {
@@ -28,6 +30,42 @@ public class Prompt {
   }
 
 
+  ///////////////////////////////////////////////////////////
+  ////////////////////// printCalendar //////////////////////
+  ///////////////////////////////////////////////////////////
+  public static int printCalendar(int year, int month) {
+    System.out.println(month + "월");
+    System.out.println("월  화  수  목  금  토  일");
+
+    // 해당 월의 첫 날짜 계산
+    LocalDate date = LocalDate.of(year, month, 1);
+
+    // 첫 날짜 이전의 공백 출력
+    int emptyDays = date.getDayOfWeek().getValue() % 7;
+    for (int i = 0; i < emptyDays; i++) {
+      System.out.print("    ");
+    }
+
+    int lastDay = 0;
+    // 해당 월의 모든 날짜 출력
+    while (date.getMonthValue() == month) {
+      // 날짜 출력
+      System.out.printf("%2d  ", date.getDayOfMonth());
+
+      // 다음 날짜로 이동
+      date = date.plusDays(1);
+
+      // 토요일마다 줄 바꿈
+      if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
+        System.out.println();
+      }
+
+      lastDay++;
+    }
+
+    System.out.println();
+    return lastDay;
+  }
 
   ///////////////////////////////////////////////////////////
   //////////////////////// Scanner //////////////////////////
@@ -62,7 +100,7 @@ public class Prompt {
   }
 
   // Program Exit
-  public static void printProgramExit() { System.out.println("프로그램을 종료합니다...");}
+  public static void printProgramExit() { System.out.println("프로그램을 종료합니다..."); }
 
   // Disaccord PassWord
   public static void printDisaccordPW() { System.out.println("비밀번호가 잘못되었습니다."); }

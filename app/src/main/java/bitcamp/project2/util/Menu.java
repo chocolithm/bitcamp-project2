@@ -1,5 +1,6 @@
 package bitcamp.project2.util;
 
+import bitcamp.project2.controller.AppointmentController;
 import bitcamp.project2.controller.PlanController;
 import bitcamp.project2.controller.UserController;
 
@@ -72,6 +73,8 @@ public class Menu {
                     myToDoMenu(Integer.parseInt(ans));
                     break;
                 case "2":   //약속 추가
+                    AppointmentController ac = AppointmentController.getInstance();
+                    ac.menu();
                     break;
                 case "3":   //사용자 관리
                     userMenu(Integer.parseInt(ans));

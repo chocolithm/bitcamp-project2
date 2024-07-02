@@ -12,6 +12,8 @@ import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static bitcamp.project2.util.Prompt.*;
+
 public class PlanController {
     LinkedList<Plan> planList = new LinkedList<>();
 
@@ -156,40 +158,6 @@ public class PlanController {
             count++;
         }
         return "\t".repeat(((20 - count - len + 3) / 4));
-    }
-
-    private static int printCalendar(int year, int month) {
-        System.out.println(month + "월");
-        System.out.println("월  화  수  목  금  토  일");
-
-        // 해당 월의 첫 날짜 계산
-        LocalDate date = LocalDate.of(year, month, 1);
-
-        // 첫 날짜 이전의 공백 출력
-        int emptyDays = date.getDayOfWeek().getValue() % 7;
-        for (int i = 0; i < emptyDays; i++) {
-            System.out.print("    ");
-        }
-
-        int lastDay = 0;
-        // 해당 월의 모든 날짜 출력
-        while (date.getMonthValue() == month) {
-            // 날짜 출력
-            System.out.printf("%2d  ", date.getDayOfMonth());
-
-            // 다음 날짜로 이동
-            date = date.plusDays(1);
-
-            // 토요일마다 줄 바꿈
-            if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                System.out.println();
-            }
-
-            lastDay++;
-        }
-
-        System.out.println();
-        return lastDay;
     }
 
     private void setDates(Plan plan) {

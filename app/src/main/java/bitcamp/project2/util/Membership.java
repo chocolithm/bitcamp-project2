@@ -1,4 +1,5 @@
 package bitcamp.project2.util;
+import bitcamp.project2.controller.UserController;
 import bitcamp.project2.vo.User;
 
 import java.util.Iterator;
@@ -7,7 +8,9 @@ import java.util.LinkedList;
 import static bitcamp.project2.util.Prompt.*;
 
 public class Membership {
-    LinkedList<User> bufUserList = new LinkedList<User>();
+
+    UserController uc = UserController.getInstance();
+    LinkedList<User> userList = uc.getUserList();
 
      String name;
      String password;
@@ -58,7 +61,7 @@ public class Membership {
 
         bufuser.setName("OREO");
         bufuser.setPassword("0000");
-        this.bufUserList.add(bufuser);
+        this.userList.add(bufuser);
         /***********************************/
 
         return membershipMenu();
@@ -91,8 +94,8 @@ public class Membership {
                         continue;
                     }
                 case "2": //join
-                    /////////////////////////////////////////////////////////
-                    break;
+                    uc.addUser();
+                    continue;
                 case "0":
                     printProgramExit();
                     return false;
@@ -131,7 +134,7 @@ public class Membership {
 
     private boolean EqualUserID(String id) {
 
-        Iterator<User> iter = bufUserList.iterator();
+        Iterator<User> iter = userList.iterator();
         User currentUser = null;
         while(iter.hasNext()) {
             currentUser = iter.next();
@@ -144,7 +147,7 @@ public class Membership {
 
 
     private boolean EqualUserPW(String pw){
-        Iterator<User> iter = bufUserList.iterator();
+        Iterator<User> iter = userList.iterator();
         User currentUser = null;
         while(iter.hasNext()) {
             currentUser = iter.next();
