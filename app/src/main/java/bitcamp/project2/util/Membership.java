@@ -131,7 +131,7 @@ public class Membership {
 
         Iterator<User> iter = bufUserList.iterator();
         User currentUser = null;
-        for (int userNo = 1; iter.hasNext(); userNo++) {
+        while(iter.hasNext()) {
             currentUser = iter.next();
 
             if (id.equals(currentUser.getName()))
@@ -144,7 +144,7 @@ public class Membership {
     private boolean EqualUserPW(String pw){
         Iterator<User> iter = bufUserList.iterator();
         User currentUser = null;
-        for (int userNo = 1; iter.hasNext(); userNo++) {
+        while(iter.hasNext()) {
             currentUser = iter.next();
 
             if (pw.equals(currentUser.getPassword()))
