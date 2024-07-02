@@ -3,14 +3,20 @@ package bitcamp.project2.vo;
 import java.util.Date;
 
 public class Plan {
-    private static int seqNo;
     private int no;
+    private String title;
     private Date startDate;
     private Date endDate;
-    private String title;
 
-    public int getNextSeqNo() {
-        return seqNo++;
+    public Plan() {
+
+    }
+
+    public Plan(int no, String title, Date startDate, Date endDate) {
+        this.no = no;
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public int getNo() {

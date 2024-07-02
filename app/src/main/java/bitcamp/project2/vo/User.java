@@ -4,23 +4,20 @@ import java.sql.Date;
 import java.util.LinkedList;
 
 public class User {
-    private static int seqNo;
-    private String id;
-    private String password;
     private String name;
+    private String password;
     private Date joinDate;
     private LinkedList planList;
 
-    public int getNextSeqNo() {
-        return seqNo++;
+    public User() {
+
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public User(String name, String password, Date joinDate, LinkedList planList) {
+        this.name = name;
+        this.password = password;
+        this.joinDate = joinDate;
+        this.planList = planList;
     }
 
     public String getPassword() {

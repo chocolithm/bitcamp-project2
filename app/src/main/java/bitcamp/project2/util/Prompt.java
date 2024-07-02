@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Prompt {
 
-  static Scanner keyboardScanner = new Scanner(System.in);
+  static Scanner ans = new Scanner(System.in);
 
   public static String input(String format, Object... args) {
     System.out.printf(format + " ", args);
-    return keyboardScanner.nextLine();
+    return ans.nextLine();
   }
 
   public static int inputInt(String format, Object... args) {
@@ -16,6 +16,6 @@ public class Prompt {
   }
 
   public static void close() {
-    keyboardScanner.close();
+    ans.close();
   }
 }
