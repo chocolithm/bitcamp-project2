@@ -3,13 +3,12 @@ import bitcamp.project2.vo.User;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Scanner;
+
+import static bitcamp.project2.util.Prompt.*;
 
 public class Membership {
     LinkedList<User> bufUserList = new LinkedList<User>();
 
-
-     Scanner sc = new Scanner(System.in);
      String name;
      String password;
 
@@ -53,7 +52,7 @@ public class Membership {
     ///////////////////////////////////////////////////////////
     ///////////////////////// Method //////////////////////////
     ///////////////////////////////////////////////////////////
-    public void menu() {
+    public boolean menu() {
         /***********************************/
         User bufuser = new User();
 
@@ -62,7 +61,7 @@ public class Membership {
         this.bufUserList.add(bufuser);
         /***********************************/
 
-        membershipMenu();
+        return membershipMenu();
     }
 
 
@@ -76,26 +75,29 @@ public class Membership {
     }
 
 
-    private void membershipMenu(){
+    private boolean membershipMenu(){
         String ans = ""; // user answer
         
         for (;;) {
             System.out.print(membershipGuide());
             System.out.print("\n메인 : ");
-            ans = sc.nextLine();
+            ans = getUserScanner();
 
             switch (ans){
                 case "1": //login
                     if(login()){
-                       return;
+                       return true;
                     }else{
                         continue;
                     }
                 case "2": //join
                     /////////////////////////////////////////////////////////
                     break;
+                case "0":
+                    printProgramExit();
+                    return false;
                 default:
-                    System.out.print("\n[ERROR] 잘못된 입력입니다. 다시 입력해주세요.\n\n");
+                    printNumberLimitException();
             }
         }
     }//Method Menu END
@@ -106,12 +108,12 @@ public class Membership {
         String pw = ""; // user answer pw
 
         System.out.print("ID? : ");
-        id = sc.nextLine();
+        id = getUserScanner();
         if(EqualUserID(id)){
             this.name = id;
 
             System.out.print("PW? : ");
-            pw = sc.nextLine();
+            pw = getUserScanner();
             if(EqualUserPW(pw)){
                 this.password = pw;
                 System.out.print("로그인 되었습니다.\n\n");
