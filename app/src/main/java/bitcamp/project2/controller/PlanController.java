@@ -32,7 +32,7 @@ public class PlanController {
     }
 
     public void listPlan() {
-        String line = "--------------------------";
+        String line = "--------------------------------------------------";
 
         if(!planList.isEmpty()) {
             System.out.println(line);
@@ -62,31 +62,7 @@ public class PlanController {
         Plan plan = new Plan();
         plan.setTitle(Prompt.input("제목? "));
 
-        int month = Prompt.inputInt("월? ");
-        if(month < 1 || month > 12) {
-            System.out.printf("%d월은 없는걸...?\n", month);
-            return;
-        }
-        int lastDay = printCalendar(2024, month);
-        String days = Prompt.input("일?(1-%d 반복할요일)", lastDay);
-
-        String startDate;
-        String endDate;
-        String repeatedDays = null;
-
-        if (days.contains(" ")) {
-            repeatedDays = days.split(" ")[1];
-        }
-        if (days.contains("-")) {
-            startDate = String.format("2024-%d-%s", month, days.split("-")[0]);
-            endDate = String.format("2024-%d-%s", month, days.split("-")[1].split(" ")[0]);
-        } else {
-            startDate = endDate = String.format("2024-%d-%s", month, days.split(" ")[0]);
-        }
-
-        plan.setStartDate(Date.valueOf(startDate));
-        plan.setEndDate(Date.valueOf(endDate));
-        plan.setRepeatedDays(repeatedDays);
+        setDates(plan);
 
         planList.add(plan);
         System.out.println("등록되었습니다.\n");
@@ -99,7 +75,7 @@ public class PlanController {
         }
 
         int planNo = Prompt.inputInt("수정할 일정?");
-        if (isValidateUser(planNo)) {
+        if (isValidatePlan(planNo)) {
             Plan plan = planList.get(planNo - 1);
 
             System.out.print("[1] 제목\t[2] 기간\n");
@@ -111,31 +87,7 @@ public class PlanController {
 
             } else if (command == 2) {
 
-                int month = Prompt.inputInt("월? ");
-                if(month < 1 || month > 12) {
-                    System.out.printf("%d월은 없는걸...?\n", month);
-                    return;
-                }
-                int lastDay = printCalendar(2024, month);
-                String days = Prompt.input("일?(1-%d 반복할요일)", lastDay);
-
-                String startDate;
-                String endDate;
-                String repeatedDays = null;
-
-                if (days.contains(" ")) {
-                    repeatedDays = days.split(" ")[1];
-                }
-                if (days.contains("-")) {
-                    startDate = String.format("2024-%d-%s", month, days.split("-")[0]);
-                    endDate = String.format("2024-%d-%s", month, days.split("-")[1].split(" ")[0]);
-                } else {
-                    startDate = endDate = String.format("2024-%d-%s", month, days.split(" ")[0]);
-                }
-
-                plan.setStartDate(Date.valueOf(startDate));
-                plan.setEndDate(Date.valueOf(endDate));
-                plan.setRepeatedDays(repeatedDays);
+                setDates(plan);
 
                 System.out.println("수정되었습니다.\n");
             } else {
@@ -151,7 +103,7 @@ public class PlanController {
         }
 
         int planNo = Prompt.inputInt("삭제할 일정?");
-        if (isValidateUser(planNo)) {
+        if (isValidatePlan(planNo)) {
             Plan plan = planList.get(planNo - 1);
 
             String command = Prompt.input("%s 일정을 삭제하시겠습니까?(y/n)", plan.getTitle());
@@ -162,7 +114,7 @@ public class PlanController {
         }
     }
 
-    private boolean isValidateUser(int planNo) {
+    private boolean isValidatePlan(int planNo) {
         if(planNo < 1 || planNo > planList.size()) {
             System.out.println("없는 일정입니다.\n");
             return false;
@@ -174,7 +126,7 @@ public class PlanController {
     public static String getTabByString(String str) {
         int count = 0;
         int len = str.length();
-        Pattern pattern = Pattern.compile("[\uAC00-\uD7A3]");
+        Pattern pattern = Pattern.compile("[가-힣]");
         Matcher matcher = pattern.matcher(str);
         while (matcher.find()) {
             count++;
@@ -212,17 +164,43 @@ public class PlanController {
             lastDay++;
         }
 
-        // 달력 출력 후 마지막 줄 바꿈
         System.out.println();
-
         return lastDay;
+    }
+
+    private void setDates(Plan plan) {
+        int month = Prompt.inputInt("월? ");
+        if(month < 1 || month > 12) {
+            System.out.printf("%d월은 없는걸...?\n", month);
+            return;
+        }
+        int lastDay = printCalendar(2024, month);
+        String days = Prompt.input("일?(1-%d 반복할요일)", lastDay);
+
+        String startDate;
+        String endDate;
+        String repeatedDays = null;
+
+        if (days.contains(" ")) {
+            repeatedDays = days.split(" ")[1];
+        }
+        if (days.contains("-")) {
+            startDate = String.format("2024-%d-%s", month, days.split("-")[0]);
+            endDate = String.format("2024-%d-%s", month, days.split("-")[1].split(" ")[0]);
+        } else {
+            startDate = endDate = String.format("2024-%d-%s", month, days.split(" ")[0]);
+        }
+
+        plan.setStartDate(Date.valueOf(startDate));
+        plan.setEndDate(Date.valueOf(endDate));
+        plan.setRepeatedDays(repeatedDays);
     }
 
     private void addTestData() {
         planList.add(new Plan(1, "가족모임", Date.valueOf("2024-07-01"), Date.valueOf("2024-07-10"), null));
         planList.add(new Plan(2, "민지랑 저녁식사", Date.valueOf("2024-07-11"), Date.valueOf("2024-07-11"), null));
         planList.add(new Plan(3, "회식", Date.valueOf("2024-07-05"), Date.valueOf("2024-07-06"), null));
-        planList.add(new Plan(3, "일", Date.valueOf("2024-07-05"), Date.valueOf("2024-07-06"), "월화"));
+        planList.add(new Plan(4, "일", Date.valueOf("2024-07-05"), Date.valueOf("2024-07-06"), "월화"));
         System.out.println("테스트데이터 등록\n");
     }
 }
