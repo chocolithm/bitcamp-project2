@@ -7,16 +7,18 @@ public class Plan {
     private String title;
     private Date startDate;
     private Date endDate;
+    private String repeatedDays;
 
     public Plan() {
 
     }
 
-    public Plan(int no, String title, Date startDate, Date endDate) {
+    public Plan(int no, String title, Date startDate, Date endDate, String repeatedDays) {
         this.no = no;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.repeatedDays = repeatedDays;
     }
 
     public int getNo() {
@@ -49,5 +51,13 @@ public class Plan {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getRepeatedDays() {
+        return repeatedDays;
+    }
+
+    public void setRepeatedDays(String repeatedDays) {
+        this.repeatedDays = repeatedDays;
     }
 }

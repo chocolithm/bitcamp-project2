@@ -51,10 +51,10 @@ public class UserController {
 
             int command = Prompt.inputInt("수정할 항목?");
             if (command == 1) {
-                user.setName(Prompt.input(user.getName() + " 이름 변경 : "));
+                user.setName(Prompt.input("'%s'님 이름 변경 : ", user.getName()));
                 System.out.println("수정되었습니다.\n");
             } else if (command == 2) {
-                user.setPassword(Prompt.input(user.getName() + " 비밀번호 변경 : "));
+                user.setPassword(Prompt.input("'%s'님 비밀번호 변경 : ", user.getName()));
                 System.out.println("수정되었습니다.\n");
             } else {
                 System.out.println("잘못된 항목입니다.");
