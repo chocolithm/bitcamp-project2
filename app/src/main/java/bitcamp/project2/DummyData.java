@@ -1,5 +1,6 @@
 package bitcamp.project2;
 
+import bitcamp.project2.controller.AppointmentController;
 import bitcamp.project2.controller.UserController;
 import bitcamp.project2.vo.Plan;
 import bitcamp.project2.vo.User;
@@ -14,7 +15,8 @@ public class DummyData {
 
     public static void addDummy(){
         addDummyUser();
-    }
+        addDummyAppoint();
+    }//Method addDummy END
 
 
     private static void addDummyUser(){
@@ -59,7 +61,7 @@ public class DummyData {
         uc.setUserList(userList);
 
         addDummyPlan();
-    }
+    }//Method addDummyUser END
 
 
 //    public Plan(int no, String title, Date startDate, Date endDate, String repeatedDays) {
@@ -111,5 +113,16 @@ public class DummyData {
             user.setPlanList(planList[userNo]);
         }
 
+    }//Method addDummyPlan END
+
+
+    private static void addDummyAppoint(){
+        LinkedList<String> appointmentList = AppointmentController.getInstance().getAppointmentList();
+        appointmentList.add("프로젝트   06/24              ( 윤상, 선아 )");
+        appointmentList.add("가족모임   07/01 ~ 07/3       ( OREO )");
+        appointmentList.add("회의       08/01 ~ 08/31 월   ( root )");
+        appointmentList.add("캠핑       08/24 ~ 08/31      ( OREO, 윤상, 선아 )");
+
+        AppointmentController.getInstance().setAppointmentList(appointmentList);
     }
-}
+}//Class DummyData END
