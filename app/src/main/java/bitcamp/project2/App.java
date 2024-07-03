@@ -3,7 +3,6 @@
  */
 package bitcamp.project2;
 
-import bitcamp.project2.controller.UserController;
 import bitcamp.project2.util.Menu;
 
 public class App {
@@ -11,6 +10,5 @@ public class App {
         DummyData.addDummy();
         Menu m = Menu.getInstance();
         m.menu();
-
     }
-}
+}//Class App END
