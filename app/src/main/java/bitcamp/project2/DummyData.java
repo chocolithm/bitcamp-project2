@@ -14,7 +14,6 @@ public class DummyData {
 
     public static void addDummy(){
         addDummyUser();
-        addDummyPlan();
     }
 
 
@@ -78,7 +77,7 @@ public class DummyData {
         }
 
 
-        Iterator<User> iter = userList.iterator();
+        Iterator<User> iter = uc.getUserList().iterator();
         User user;
 
         int no;
@@ -87,29 +86,30 @@ public class DummyData {
         Date endDate;
         String repeatedDays;
 
-        for(int i=0;iter.hasNext();i++){
-            int j=0;
+        for(int userNo=0;iter.hasNext();userNo++){
+            int planeNo=0;
             user = iter.next();
 
-            for(; j<5; j++){
-                no = 10*i+j;
+            for(; planeNo<5; planeNo++){
+                no = 10*userNo+planeNo;
                 title = "Project"+String.format("%03d",no);
-                startDate = Date.valueOf(String.format("2024-%d-%s", 7, (i+j)+1 ));
-                endDate = Date.valueOf(String.format("2024-%d-%s", 7, (i+j)+3 ));
+                startDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planeNo)+1 ));
+                endDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planeNo)+3 ));
                 repeatedDays = "";
 
-                planList[i].add(new Plan(no, title, startDate, endDate, repeatedDays));
+                planList[userNo].add(new Plan(no, title, startDate, endDate, repeatedDays));
             }
 
-            no = 10*i+j;
+            no = 10*userNo+planeNo;
             title = "Project"+String.format("%03d",no);
-            startDate = Date.valueOf(String.format("2024-%d-%s", 7, (i+j) ));
-            endDate = Date.valueOf(String.format("2024-%d-%s", 7, (i+j)+14 ));
+            startDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planeNo) ));
+            endDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planeNo)+14 ));
             repeatedDays = "월";
 
-            planList[i].add(new Plan(no, title, startDate, endDate, repeatedDays));
+            planList[userNo].add(new Plan(no, title, startDate, endDate, repeatedDays));
 
-            user.setPlanList(planList[i]);
+            user.setPlanList(planList[userNo]);
         }
+
     }
 }
