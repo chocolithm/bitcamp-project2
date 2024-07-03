@@ -80,7 +80,6 @@ public class DummyData {
 
 
         Iterator<User> iter = uc.getUserList().iterator();
-        User user;
 
         int no;
         String title;
@@ -89,23 +88,23 @@ public class DummyData {
         String repeatedDays;
 
         for(int userNo=0;iter.hasNext();userNo++){
-            int planeNo=0;
-            user = iter.next();
+            int planNo=0;
+            User user = iter.next();
 
-            for(; planeNo<5; planeNo++){
-                no = 10*userNo+planeNo;
+            for(; planNo<5; planNo++){
+                no = 10*userNo+planNo;
                 title = "Project"+String.format("%03d",no);
-                startDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planeNo)+1 ));
-                endDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planeNo)+3 ));
+                startDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo)+1 ));
+                endDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo)+3 ));
                 repeatedDays = "";
 
                 planList[userNo].add(new Plan(no, title, startDate, endDate, repeatedDays));
             }
 
-            no = 10*userNo+planeNo;
+            no = 10*userNo+planNo;
             title = "Project"+String.format("%03d",no);
-            startDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planeNo) ));
-            endDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planeNo)+14 ));
+            startDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo) ));
+            endDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo)+14 ));
             repeatedDays = "월";
 
             planList[userNo].add(new Plan(no, title, startDate, endDate, repeatedDays));
