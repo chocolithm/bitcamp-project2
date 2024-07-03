@@ -49,6 +49,11 @@ public class Menu {
         }
     }
 
+
+
+
+
+
     /////////////////////////// login //////////////////////////
     private boolean loginMenu(){
         Membership m = Membership.getInstance();
@@ -80,7 +85,7 @@ public class Menu {
                     ac.menu();
                     break;
                 case "3":   //사용자 관리
-                    printUserMenu(Integer.parseInt(ans));
+                    userMenu(Integer.parseInt(ans));
                     break;
                 case "0":   //종료
                     printProgramExit();
@@ -179,8 +184,10 @@ public class Menu {
 
 
 
+    ///////////////////////// 2. 약속 추가 ////////////////////////
+    private void appointmentMenu(){
 
-
+    }
 
 
     /////////////////////// 3. 사용자 관리 ////////////////////////

@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Prompt {
 
   static Scanner ans = new Scanner(System.in);
-  static String[] mainMenus = new String[]{"내 일정", "약속추가", "사용자관리", "종료"};
+  static String[] mainMenus = new String[]{"내 일정", "약속추가", "사용자관리"};
   static String[][] subMenus = {
           {"등록", "수정", "삭제"},
           {},
@@ -130,7 +130,7 @@ public class Prompt {
   private static String printError(){ return "[ERROR] "; }
 
   //Line
-  public static String printLine(){ return "++-------------------------------------------------------------++\n"; }
+  public static String printLine(){ return "++-----------------------------------------------------------------------++\n"; }
 
   public static void printBuff(){
     for(int i=0;i<30;i++) {
