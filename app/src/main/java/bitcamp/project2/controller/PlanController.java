@@ -1,7 +1,5 @@
 package bitcamp.project2.controller;
 
-import bitcamp.project2.util.Membership;
-import bitcamp.project2.util.Menu;
 import bitcamp.project2.util.Prompt;
 import bitcamp.project2.vo.Plan;
 import bitcamp.project2.vo.User;
@@ -15,10 +13,10 @@ import java.util.regex.Pattern;
 import static bitcamp.project2.util.Prompt.*;
 
 public class PlanController{
-    UserController uc = UserController.getInstance();
-    User loginUser = uc.getUserByName(Membership.getInstance().getName());
-    LinkedList<Plan> planList = loginUser.getPlanList();
-//      LinkedList<Plan> planList;
+//    UserController uc = UserController.getInstance();
+//    User loginUser = uc.getUserByName(Membership.getInstance().getName());
+//    LinkedList<Plan> planList = loginUser.getPlanList();
+      LinkedList<Plan> planList;
 
     ///////////////////////////////////////////////////////////
     ////////////////////// getInstance() //////////////////////
@@ -28,9 +26,7 @@ public class PlanController{
     // setup Menu Instance
     public static PlanController getInstance(User user) {
 
-        if (m == null) {
-            m = new PlanController(user);
-        }
+        m = new PlanController(user);
 
         return m;
     }// Method getInstance END
@@ -42,7 +38,7 @@ public class PlanController{
 
 
     PlanController(User user){
-        this.planList.addAll(user.getPlanList());
+        this.planList = user.getPlanList();
     }
 
 
@@ -121,7 +117,7 @@ public class PlanController{
 
         planList.add(plan);
         System.out.println("등록되었습니다.\n");
-        loading(2000);
+        loading(1000);
     }//Method addPlan END
 
 
@@ -142,16 +138,16 @@ public class PlanController{
                     case 1:
                         plan.setTitle(Prompt.input("'%s' 이름 변경 : ", plan.getTitle()));
                         System.out.println("수정되었습니다.\n");
-                        loading(2000);
+                        loading(1000);
                         break;
                     case 2:
                         setDates(plan);
                         System.out.println("수정되었습니다.\n");
-                        loading(2000);
+                        loading(1000);
                         break;
                     default:
                         System.out.println("잘못된 항목입니다.");
-                        loading(2000);
+                        loading(1000);
                         break;
                 }
 //                if (command == 1) {
@@ -185,7 +181,7 @@ public class PlanController{
                if (command.equals("Y") || command.equals("y")) {
                    planList.remove(planNo - 1);
                    System.out.printf("'%s' 일정을 삭제했습니다.\n\n", plan.getTitle());
-                   loading(2000);
+                   loading(1000);
                }
            }//Method isValidatePlan END
        }//Method isValidatePlanList END
@@ -292,7 +288,7 @@ public class PlanController{
     private boolean isValidatePlanList(){
         if(planList.isEmpty()) {
             System.out.println("현재 등록된 일정이 없습니다.\n");
-            loading(2000);
+            loading(1000);
             return false;
         }
         return true;
@@ -306,7 +302,7 @@ public class PlanController{
     private boolean isValidatePlan(int planNo) {
         if(planNo < 1 || planNo > planList.size()) {
             System.out.println("없는 일정입니다.\n");
-            loading(2000);
+            loading(1000);
             return false;
         } else {
             return true;
