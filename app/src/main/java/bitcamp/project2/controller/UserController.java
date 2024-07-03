@@ -3,10 +3,11 @@ package bitcamp.project2.controller;
 import bitcamp.project2.util.Prompt;
 import bitcamp.project2.vo.User;
 
+import java.sql.Date;
 import java.util.LinkedList;
+import java.util.Objects;
 
-import static bitcamp.project2.util.Prompt.printLine;
-import static bitcamp.project2.util.Prompt.printNumberLimitException;
+import static bitcamp.project2.util.Prompt.*;
 
 public class UserController {
     static LinkedList<User> userList = new LinkedList<>();
@@ -61,8 +62,15 @@ public class UserController {
     public void addUser() {
         User user = new User();
 
-        user.setName(Prompt.input("ID? "));
+        String name = Prompt.input("ID? ");
+        if(getUserByName(name) != null) {
+            printReturnToPrevious("이미 등록된 ID입니다.");
+            return;
+        }
+        user.setName(name);
         user.setPassword(Prompt.input("PW? "));
+        user.setJoinDate(new Date(System.currentTimeMillis()));
+        user.setPlanList(new LinkedList<>());
 
         userList.add(user);
         System.out.println("등록되었습니다.");
@@ -104,8 +112,11 @@ public class UserController {
                 int command = Prompt.inputInt("수정할 항목?");
                 switch (command){
                     case 1:
-                        user.setName(Prompt.input("'%s'님 이름 변경 : ", user.getName()));
-                        System.out.print("수정되었습니다.\n\n");
+                        String oldName = user.getName();
+                        String newName = Prompt.input("'%s'님 이름 변경 : ", oldName);
+                        user.setName(newName);
+                        AppointmentController.getInstance().updateUserName(oldName, newName);
+                        System.out.println("수정되었습니다.\n");
                         break;
                     case 2:
                         user.setPassword(Prompt.input("'%s'님 비밀번호 변경 : ", user.getName()));
@@ -144,6 +155,7 @@ public class UserController {
                 if (command.equals("Y") || command.equals("y")) {
                     userList.remove(userNo - 1);
                     System.out.printf("[%s 님을 삭제했습니다.]\n\n", user.getName());
+                    AppointmentController.getInstance().updateUserName(user.getName(), "");
                 }
             }
         }
@@ -166,6 +178,15 @@ public class UserController {
             return true;
         }
     }//Method isValidateUser END
+
+    public User getUserByName(String name) {
+        for(User user : userList) {
+            if(Objects.equals(user.getName(), name)) {
+                return user;
+            }
+        }
+        return null;
+    }//Method getUserByName END
 
 //    private void addTestData() {
 //        Date date = new Date(System.currentTimeMillis());
