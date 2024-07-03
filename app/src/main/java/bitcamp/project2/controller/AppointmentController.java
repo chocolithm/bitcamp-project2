@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 import static bitcamp.project2.util.Prompt.*;
+import static bitcamp.project2.util.Prompt.printReturnToMain;
 
 public class AppointmentController {
     UserController uc = UserController.getInstance();
@@ -21,22 +22,6 @@ public class AppointmentController {
     LinkedList<String> appointmentList = new LinkedList<>();
     String appointment = "";
 
-//    public class Plan
-//        private int no;
-//        private String title;
-//        private Date startDate;
-//        private Date endDate;
-//        private String repeatedDays;
-//
-//
-//
-//    public class User
-//        private String name;
-//        private String password;
-//        private java.sql.Date joinDate;
-//        private LinkedList planList;
-
-
 
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
@@ -44,7 +29,6 @@ public class AppointmentController {
     AppointmentController(){
 
     }
-
 
 
     ///////////////////////////////////////////////////////////
@@ -68,13 +52,16 @@ public class AppointmentController {
     }// Method freeInstance END
 
 
-
     ///////////////////////////////////////////////////////////
     ///////////////////////// Method //////////////////////////
     ///////////////////////////////////////////////////////////
     public void menu(){
         setMember();
-        setDate();
+        if(!memberList.isEmpty()) {
+            setDate();
+        } else {
+            printReturnToMain("추가한 멤버가 없습니다.");
+        }
     }
 
     //////////////////////// set Member ////////////////////////
@@ -95,10 +82,10 @@ public class AppointmentController {
                     memberList.add(ans);
                     continue;
                 }
-                System.out.printf("이미 존재하는 멤버입니다. \n");
+                System.out.print("이미 존재하는 멤버입니다. \n");
                 continue;
             }
-            System.out.printf("존재하지 않는 멤버입니다. \n");
+            System.out.print("존재하지 않는 멤버입니다. \n");
         }
 
     }
@@ -138,9 +125,39 @@ public class AppointmentController {
     //////////////////////// set Date ////////////////////////
     private void setDate(){
         int month = getMonth();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2024);
+
         if(month > 0){
-            searchDate(month);
+            calendar.set(Calendar.MONTH, month - 1);
+            int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+            int[] tempAvailableDates = getTempAvailableDates(month, lastDay);
+            LinkedList<Plan> availableDates = getAvailableDates(month, lastDay, tempAvailableDates);
+
+            if (availableDates.isEmpty()) {
+                printReturnToMain("가능한 일정이 없습니다.");
+                return;
+            }
+
+            listAvailableDates(availableDates);
+
+            if (Prompt.input("일정을 등록하시겠습니까?(y/n)").equalsIgnoreCase("y")) {
+                addAppointment(month);
+            }
+        } else {
+            printReturnToMain("월 입력이 잘못되었습니다.");
         }
+    }
+
+    private int getMonth(){
+        System.out.print(printSetDate());
+        int month;
+        String ans = getUserScanner();
+        if(isValidateDate(ans)){
+            month = Integer.parseInt(ans);
+            return month;
+        }
+        return -1;
     }
 
     private String printSetDate(){
@@ -151,39 +168,24 @@ public class AppointmentController {
         return str;
     }
 
-    private int getMonth(){
-        System.out.print(printSetDate());
-        int month;
-        String ans = getUserScanner();
-        if(isValidateDate(ans)){
-            month = Integer.parseInt(ans);
-          return month;
-        }
-        return -1;
-    }
-
     private boolean isValidateDate(String ans){
         try{
             int month = Integer.parseInt(ans);
-            return month > 0 && month <= 12 ? true : false;
+            return month > 0 && month <= 12;
         }catch (NumberFormatException e){
             return false;
         }
     }
 
-    private void searchDate(int month){
+    public int[] getTempAvailableDates(int month, int lastDay) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 2024);
-        calendar.set(Calendar.MONTH, month - 1);
-        int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         int[] tempAvailableDates = new int[lastDay];
 
-        // 가능한 기간 추출
         for (int i = 0; i < memberList.size(); i++) {
             User user = getUserByName(memberList.get(i));
             if(user.getPlanList() != null) {
                 for (int j = 0; j < user.getPlanList().size(); j++) {
-                    Plan plan = (Plan) user.getPlanList().get(j);
+                    Plan plan = user.getPlanList().get(j);
 
                     calendar.setTime(plan.getStartDate());
                     if(calendar.get(Calendar.MONTH) == month - 1) {
@@ -199,9 +201,14 @@ public class AppointmentController {
             }
         }
 
-        LinkedList<Plan> availableDates = new LinkedList<>();
+        return tempAvailableDates;
+    }
+
+    public LinkedList<Plan> getAvailableDates(int month, int lastDay, int[] tempAvailableDates) {
         Date sDate = null, eDate = null;
         Plan plan = new Plan();
+        LinkedList<Plan> availableDates = new LinkedList<>();
+
         for(int i = 0; i < lastDay - 1; i++) {
             if(tempAvailableDates[i] == 0) {
                 if(sDate == null) {
@@ -225,36 +232,32 @@ public class AppointmentController {
             }
         }
 
-        if(availableDates.isEmpty()) {
-            System.out.println("가능한 일정이 없습니다.");
-            return;
-        }
-
-        listAvailableDates(availableDates);
-        if(Prompt.input("일정을 등록하시겠습니까?(y/n)").equalsIgnoreCase("y")) {
-            plan = new Plan();
-            plan.setTitle(Prompt.input("제목? "));
-            appointment += plan.getTitle() + " ";
-
-            setDates(plan, month);
-
-            appointment += " ( ";
-
-            for(String str : memberList) {
-                appointment += str + " ";
-                User user = getUserByName(str);
-                user.getPlanList().add(plan);
-            }
-
-            appointment += ")";
-            appointmentList.add(appointment);
-            appointment = "";
-
-            System.out.println("등록되었습니다.\n");
-        }
+        return availableDates;
     }
 
-    public void setDates(Plan plan, int month) {
+    public void addAppointment(int month) {
+        Plan plan = new Plan();
+        plan.setTitle(Prompt.input("제목? "));
+        appointment += plan.getTitle() + " ";
+
+        addDates(plan, month);
+
+        appointment += " ( ";
+
+        for(String str : memberList) {
+            appointment += str + " ";
+            User user = getUserByName(str);
+            user.getPlanList().add(plan);
+        }
+
+        appointment += ")";
+        appointmentList.add(appointment);
+        appointment = "";
+
+        System.out.println("등록되었습니다.\n");
+    }
+
+    public void addDates(Plan plan, int month) {
         int lastDay = printCalendar(2024, month);
         String days = Prompt.input("일?(1-%d 반복할요일)", lastDay);
 
@@ -278,12 +281,11 @@ public class AppointmentController {
         plan.setEndDate(Date.valueOf(endDate));
         plan.setRepeatedDays(repeatedDays);
 
-        if(startDate != endDate) {
-            appointment += formatter.format(plan.getStartDate()) + " ~ " + formatter.format(plan.getEndDate());
-        } else {
+        if(startDate.equals(endDate)) {
             appointment += formatter.format(plan.getStartDate());
+        } else {
+            appointment += formatter.format(plan.getStartDate()) + " ~ " + formatter.format(plan.getEndDate());
         }
-
     }
 
     private void listAvailableDates(LinkedList<Plan> availableDates) {
