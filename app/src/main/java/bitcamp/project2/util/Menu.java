@@ -85,7 +85,7 @@ public class Menu {
                     break;
                 case "2":   //약속 추가
                     AppointmentController ac = AppointmentController.getInstance();
-                    ac.menu();
+                    ac.appointment();
                     break;
                 case "3":   //사용자 관리
                     userMenu(Integer.parseInt(ans));
@@ -177,13 +177,13 @@ public class Menu {
                 break;
             }
 
-            planController.executePlanCommand(command);
+            planController.plan(command);
         }
     }//Method printMyToDoMenu END
 
     private void printMyToDoMenuTUI(){
         System.out.print(printLine());
-        System.out.println("                            내 일정");
+        System.out.println("                                  내 일정");
     }//Method printMyToDoMenuTUI END
 
 
@@ -220,7 +220,7 @@ public class Menu {
                     break;
                 }
 
-                uc.executeUserCommand(command);
+                uc.user(command);
             }
         }
     }//Method printUserMenu END
