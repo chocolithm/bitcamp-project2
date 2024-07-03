@@ -80,7 +80,7 @@ public class AppointmentController {
             setDate();
         } else {
             System.out.println("추가한 멤버가 없습니다.");
-            loading(2000);
+            loading(1000);
         }
     }
 
@@ -100,15 +100,14 @@ public class AppointmentController {
                 if(!isDuplicateMember(ans)){
                     System.out.printf("'%s'님을 추가합니다. \n", ans);
                     memberList.add(ans);
-                    loading(2000);
                     continue;
                 }
                 System.out.print("이미 존재하는 멤버입니다. \n");
-                loading(2000);
+                loading(1000);
                 continue;
             }
             System.out.print("존재하지 않는 멤버입니다. \n");
-            loading(2000);
+            loading(1000);
         }
 
     }
@@ -159,7 +158,7 @@ public class AppointmentController {
 
             if (availableDates.isEmpty()) {
                 System.out.println("가능한 일정이 없습니다.");
-                loading(2000);
+                loading(1000);
                 return;
             }
 
@@ -170,7 +169,7 @@ public class AppointmentController {
             }
         } else {
             System.out.println("월 입력이 잘못되었습니다.");
-            loading(2000);
+            loading(1000);
         }
     }
 
@@ -282,7 +281,7 @@ public class AppointmentController {
         appointment = "";
 
         System.out.println("등록되었습니다.\n");
-        loading(2000);
+        loading(1000);
     }
 
     public void addDates(Plan plan, int month) {
@@ -313,6 +312,10 @@ public class AppointmentController {
             appointment += formatter.format(plan.getStartDate());
         } else {
             appointment += formatter.format(plan.getStartDate()) + " ~ " + formatter.format(plan.getEndDate());
+        }
+
+        if(repeatedDays != null) {
+            appointment += " " + repeatedDays;
         }
 
         appointment += getTabByString(appointment, 28);

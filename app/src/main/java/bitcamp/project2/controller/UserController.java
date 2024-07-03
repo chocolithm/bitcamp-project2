@@ -65,7 +65,7 @@ public class UserController {
         String name = Prompt.input("ID? ");
         if(getUserByName(name) != null) {
             System.out.println("이미 등록된 ID입니다.");
-            loading(2000);
+            loading(1000);
             return;
         }
         user.setName(name);
@@ -75,7 +75,7 @@ public class UserController {
 
         userList.add(user);
         System.out.println("등록되었습니다.");
-        loading(2000);
+        loading(1000);
     }//Method addUser END
 
 
@@ -119,16 +119,16 @@ public class UserController {
                         user.setName(newName);
                         AppointmentController.getInstance().updateUserName(oldName, newName);
                         System.out.println("수정되었습니다.\n");
-                        loading(2000);
+                        loading(1000);
                         break;
                     case 2:
                         user.setPassword(Prompt.input("'%s'님 비밀번호 변경 : ", user.getName()));
                         System.out.print("수정되었습니다.\n\n");
-                        loading(2000);
+                        loading(1000);
                         break;
                     default:
                         System.out.println("잘못된 항목입니다.");
-                        loading(2000);
+                        loading(1000);
                         break;
                 }
 //                if (command == 1) {
@@ -161,7 +161,7 @@ public class UserController {
                     userList.remove(userNo - 1);
                     System.out.printf("[%s 님을 삭제했습니다.]\n\n", user.getName());
                     AppointmentController.getInstance().updateUserName(user.getName(), "");
-                    loading(2000);
+                    loading(1000);
                 }
             }
         }
@@ -170,7 +170,7 @@ public class UserController {
     private boolean isValidateUserList(){
         if(userList.isEmpty()) {
             System.out.print("[현재 관리할 사용자가 없습니다.]\n");
-            loading(2000);
+            loading(1000);
             return false;
         }
         return true;
@@ -180,7 +180,7 @@ public class UserController {
     private boolean isValidateUser(int userNo) {
         if(userNo < 1 || userNo > userList.size()) {
             System.out.print("[존재하지 않는 사용자입니다.]\n");
-            loading(2000);
+            loading(1000);
             return false;
         } else {
             return true;
