@@ -1,8 +1,11 @@
 package bitcamp.project2.controller;
 
+import bitcamp.project2.util.Membership;
 import bitcamp.project2.util.Prompt;
+import bitcamp.project2.vo.Plan;
 import bitcamp.project2.vo.User;
 
+import java.lang.reflect.Member;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -60,6 +63,8 @@ public class UserController {
 
         user.setName(name);
         user.setPassword(Prompt.input("PW? "));
+        user.setJoinDate(new Date(System.currentTimeMillis()));
+        user.setPlanList(new LinkedList<Plan>());
 
         userList.add(user);
         System.out.println("등록되었습니다.");
@@ -113,9 +118,15 @@ public class UserController {
         int userNo = Prompt.inputInt("사용자 번호?");
         if(isValidateUser(userNo)) {
             User user = userList.get(userNo - 1);
+            String loginUser = Membership.getInstance().getName();
+
+            if(user.getName().equals(loginUser)) {
+                printReturnToPrevious("본인은 삭제할 수 없습니다.");
+                return;
+            }
 
             String command = Prompt.input("%s 님을 삭제하시겠습니까?(y/n)", user.getName());
-            if(command.equals("Y") || command.equals("y")) {
+            if(command.equalsIgnoreCase("y")) {
                 userList.remove(userNo - 1);
                 System.out.printf("%s 님을 삭제했습니다.\n\n", user.getName());
             }

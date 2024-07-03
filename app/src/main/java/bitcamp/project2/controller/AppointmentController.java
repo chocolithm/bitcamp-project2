@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import static bitcamp.project2.util.Prompt.*;
-import static bitcamp.project2.util.Prompt.printReturnToPrevious;
 
 public class AppointmentController {
     UserController uc = UserController.getInstance();
