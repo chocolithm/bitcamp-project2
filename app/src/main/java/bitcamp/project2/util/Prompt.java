@@ -138,6 +138,7 @@ public class Prompt {
     }
   }
 
+  // 사용자가 메시지를 확인해야 할 때
   public static void printReturnToPrevious(String message) {
     System.out.println(message);
     System.out.println("이전으로 돌아갑니다. (엔터)");

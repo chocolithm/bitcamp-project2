@@ -5,7 +5,6 @@ import bitcamp.project2.util.Prompt;
 import bitcamp.project2.vo.Plan;
 import bitcamp.project2.vo.User;
 
-import java.lang.reflect.Member;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -98,7 +97,10 @@ public class UserController {
 
             int command = Prompt.inputInt("수정할 항목?");
             if (command == 1) {
-                user.setName(Prompt.input("'%s'님 이름 변경 : ", user.getName()));
+                String oldName = user.getName();
+                String newName = Prompt.input("'%s'님 이름 변경 : ", oldName);
+                user.setName(newName);
+                AppointmentController.getInstance().updateUserName(oldName, newName);
                 System.out.println("수정되었습니다.\n");
             } else if (command == 2) {
                 user.setPassword(Prompt.input("'%s'님 비밀번호 변경 : ", user.getName()));
@@ -129,6 +131,7 @@ public class UserController {
             if(command.equalsIgnoreCase("y")) {
                 userList.remove(userNo - 1);
                 System.out.printf("%s 님을 삭제했습니다.\n\n", user.getName());
+                AppointmentController.getInstance().updateUserName(user.getName(), "");
             }
         }
     }

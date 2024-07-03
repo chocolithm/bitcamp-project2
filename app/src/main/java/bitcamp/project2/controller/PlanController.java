@@ -1,13 +1,12 @@
 package bitcamp.project2.controller;
 
+import bitcamp.project2.util.Membership;
 import bitcamp.project2.util.Menu;
 import bitcamp.project2.util.Prompt;
 import bitcamp.project2.vo.Plan;
 import bitcamp.project2.vo.User;
 
 import java.sql.Date;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
@@ -16,7 +15,9 @@ import java.util.regex.Pattern;
 import static bitcamp.project2.util.Prompt.*;
 
 public class PlanController{
-    LinkedList<Plan> planList = new LinkedList<>();
+    UserController uc = UserController.getInstance();
+    User loginUser = uc.getUserByName(Membership.getInstance().getName());
+    LinkedList<Plan> planList = loginUser.getPlanList();
 //      LinkedList<Plan> planList;
 
     ///////////////////////////////////////////////////////////

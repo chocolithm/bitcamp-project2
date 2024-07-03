@@ -245,7 +245,9 @@ public class AppointmentController {
         for(String str : memberList) {
             appointment += str + " ";
             User user = uc.getUserByName(str);
-            user.getPlanList().add(plan);
+            LinkedList<Plan> planList = user.getPlanList();
+            planList.add(plan);
+            user.setPlanList(planList);
         }
 
         appointment += ")";
@@ -310,6 +312,14 @@ public class AppointmentController {
 
     public LinkedList<String> getAppointmentList() {
         return appointmentList;
+    }
+
+    public void updateUserName(String oldName, String newName) {
+        for(int i = 0; i < appointmentList.size(); i++) {
+            if(appointmentList.get(i).contains(oldName)) {
+                appointmentList.set(i, appointmentList.get(i).replace(oldName, newName));
+            }
+        }
     }
 
 }//Class AppointmentController END
