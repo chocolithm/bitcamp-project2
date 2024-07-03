@@ -52,6 +52,11 @@ public class Menu {
         }
     }
 
+
+
+
+
+
     /////////////////////////// login //////////////////////////
     private boolean loginMenu(){
         Membership m = Membership.getInstance();
@@ -80,10 +85,10 @@ public class Menu {
                     break;
                 case "2":   //약속 추가
                     AppointmentController ac = AppointmentController.getInstance();
-                    ac.menu();
+                    ac.appointment();
                     break;
                 case "3":   //사용자 관리
-                    printUserMenu(Integer.parseInt(ans));
+                    userMenu(Integer.parseInt(ans));
                     break;
                 case "0":   //종료
                     printProgramExit();
@@ -172,20 +177,22 @@ public class Menu {
                 break;
             }
 
-            planController.executePlanCommand(command);
+            planController.plan(command);
         }
     }//Method printMyToDoMenu END
 
     private void printMyToDoMenuTUI(){
         System.out.print(printLine());
-        System.out.println("                            내 일정");
+        System.out.println("                                  내 일정");
     }//Method printMyToDoMenuTUI END
 
 
 
 
+    ///////////////////////// 2. 약속 추가 ////////////////////////
+    private void appointmentMenu(){
 
-
+    }
 
 
     /////////////////////// 3. 사용자 관리 ////////////////////////
@@ -213,7 +220,7 @@ public class Menu {
                     break;
                 }
 
-                uc.executeUserCommand(command);
+                uc.user(command);
             }
         }
     }//Method printUserMenu END

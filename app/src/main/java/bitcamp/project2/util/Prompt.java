@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Prompt {
 
   static Scanner ans = new Scanner(System.in);
-  static String[] mainMenus = new String[]{"내 일정", "약속추가", "사용자관리", "종료"};
+  static String[] mainMenus = new String[]{"내 일정", "약속추가", "사용자관리"};
   static String[][] subMenus = {
           {"등록", "수정", "삭제"},
           {},
@@ -90,7 +90,12 @@ public class Prompt {
   }
 
   public static int inputInt(String format, Object... args) {
-    return Integer.parseInt(input(format, args));
+    try{
+      return Integer.parseInt(input(format, args));
+    }catch (NumberFormatException e){
+      printNumberFormatException();
+      return -1;
+    }
   }
 
   public static void close() {
@@ -103,12 +108,12 @@ public class Prompt {
 
   // [ERROR message] if system.in doesn't get Number
   public static void printNumberFormatException() {
-    System.out.println( printError()+"숫자로 입력해주세요.");
+    System.out.println( printError()+"숫자로 입력해주세요.]");
   }
 
   // [ERROR message] if system.in get over Number
   public static void printNumberLimitException() {
-    System.out.println( printError()+"유효한 숫자를 입력해주세요.");
+    System.out.println( printError()+"유효한 숫자를 입력해주세요.]");
   }
 
   // Program Exit
@@ -127,13 +132,13 @@ public class Prompt {
   public static void printSuccessLogin() {System.out.print("[로그인 되었습니다.]\n\n");}
 
   //[ERROR]
-  private static String printError(){ return "[ERROR] "; }
+  private static String printError(){ return "[ERROR) "; }
 
   //Line
-  public static String printLine(){ return "++-------------------------------------------------------------++\n"; }
+  public static String printLine(){ return "++-----------------------------------------------------------------------++\n"; }
 
   public static void printBuff(){
-    for(int i=0;i<30;i++) {
+    for(int i=0;i<35;i++) {
       System.out.print("\n");
     }
   }
