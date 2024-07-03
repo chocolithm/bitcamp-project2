@@ -1,10 +1,15 @@
 package bitcamp.project2.controller;
 
+import bitcamp.project2.util.Prompt;
 import bitcamp.project2.vo.Plan;
 import bitcamp.project2.vo.User;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Objects;
 
 import static bitcamp.project2.util.Prompt.*;
 
@@ -73,6 +78,7 @@ public class AppointmentController {
     //////////////////////// set Member ////////////////////////
     private void setMember(){
         String ans = "";
+        memberList = new LinkedList<>();
 
         for(;;) {
             System.out.print(printSetMember());
@@ -129,8 +135,9 @@ public class AppointmentController {
 
     //////////////////////// set Date ////////////////////////
     private void setDate(){
-        if(getMonth()>0){
-            searchDate();
+        int month = getMonth();
+        if(month > 0){
+            searchDate(month);
         }
     }
 
@@ -156,14 +163,139 @@ public class AppointmentController {
     private boolean isValidateDate(String ans){
         try{
             int month = Integer.parseInt(ans);
-            return month>0 && month<=12 ? true : false;
+            return month > 0 && month <= 12 ? true : false;
         }catch (NumberFormatException e){
             return false;
         }
     }
 
-    private void searchDate(){
+    private void searchDate(int month){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2024);
+        calendar.set(Calendar.MONTH, month - 1);
+        int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int[] tempAvailableDates = new int[lastDay];
 
+        // 가능한 기간 추출
+        for (int i = 0; i < memberList.size(); i++) {
+            User user = getUserByName(memberList.get(i));
+            if(user.getPlanList() != null) {
+                for (int j = 0; j < user.getPlanList().size(); j++) {
+                    Plan plan = (Plan) user.getPlanList().get(j);
+
+                    calendar.setTime(plan.getStartDate());
+                    if(calendar.get(Calendar.MONTH) == month - 1) {
+                        int startDate = calendar.get(Calendar.DAY_OF_MONTH);
+                        calendar.setTime(plan.getEndDate());
+                        int endDate = calendar.get(Calendar.DAY_OF_MONTH);
+
+                        for(int k = startDate - 1; k < endDate; k++) {
+                            tempAvailableDates[k] = -1;
+                        }
+                    }
+                }
+            }
+        }
+
+        LinkedList<Plan> availableDates = new LinkedList<>();
+        Date sDate = null, eDate = null;
+        Plan plan = new Plan();
+        for(int i = 0; i < lastDay - 1; i++) {
+            if(tempAvailableDates[i] == 0) {
+                if(sDate == null) {
+                    sDate = Date.valueOf(String.format("2024-%02d-%02d", month, i + 1));
+                }
+                if(tempAvailableDates[i + 1] == -1) {
+                    eDate = Date.valueOf(String.format("2024-%02d-%02d", month, i + 1));
+                }
+                if(i + 2 == lastDay && tempAvailableDates[i + 1] == 0) {
+                    eDate = Date.valueOf(String.format("2024-%02d-%02d", month, i + 2));
+                }
+
+                if(sDate != null && eDate != null) {
+                    plan.setStartDate(sDate);
+                    plan.setEndDate(eDate);
+                    availableDates.add(plan);
+
+                    sDate = eDate = null;
+                    plan = new Plan();
+                }
+            }
+        }
+
+        if(availableDates.isEmpty()) {
+            System.out.println("가능한 일정이 없습니다.");
+            return;
+        }
+
+        listAvailableDates(availableDates);
+        if(Prompt.input("일정을 등록하시겠습니까?(y/n)").equalsIgnoreCase("y")) {
+            plan = new Plan();
+            plan.setTitle(Prompt.input("제목? "));
+
+            setDates(plan, month);
+
+            for(String str : memberList) {
+                User user = getUserByName(str);
+                user.getPlanList().add(plan);
+            }
+            System.out.println("등록되었습니다.\n");
+        }
+    }
+
+    public void setDates(Plan plan, int month) {
+        int lastDay = printCalendar(2024, month);
+        String days = Prompt.input("일?(1-%d 반복할요일)", lastDay);
+
+        String startDate;
+        String endDate;
+        String repeatedDays = null;
+
+        if (days.contains(" ")) {
+            repeatedDays = days.split(" ")[1];
+        }
+        if (days.contains("-")) {
+            startDate = String.format("2024-%d-%s", month, days.split("-")[0]);
+            endDate = String.format("2024-%d-%s", month, days.split("-")[1].split(" ")[0]);
+        } else {
+            startDate = endDate = String.format("2024-%d-%s", month, days.split(" ")[0]);
+        }
+
+        plan.setStartDate(Date.valueOf(startDate));
+        plan.setEndDate(Date.valueOf(endDate));
+        plan.setRepeatedDays(repeatedDays);
+    }
+
+    private void listAvailableDates(LinkedList<Plan> availableDates) {
+        String line = "--------------------------------------------------";
+        System.out.println(line);
+        System.out.println("No\t\tDate");
+        for(int i = 0; i < availableDates.size(); i++) {
+            Plan plan = availableDates.get(i);
+            String date = "";
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd");
+            String startDate = formatter.format(plan.getStartDate());
+            String endDate = formatter.format(plan.getEndDate());
+
+            if(startDate.equals(endDate)) {
+                date = startDate;
+            } else {
+                date = startDate + " ~ " + endDate;
+            }
+
+            System.out.printf("%d.\t\t%s\n", (i + 1), date);
+        }
+        System.out.println(line);
+    }
+
+    private User getUserByName(String name) {
+        for (User user : userList) {
+            if (Objects.equals(name, user.getName())) {
+                return user;
+            }
+        }
+
+        return null;
     }
 
 }//Class AppointmentController END

@@ -7,7 +7,7 @@ public class User {
     private String name;
     private String password;
     private Date joinDate;
-    private static LinkedList<Plan> planList;
+    private LinkedList<Plan> planList;
 
     public User() {
 
