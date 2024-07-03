@@ -64,7 +64,8 @@ public class UserController {
 
         String name = Prompt.input("ID? ");
         if(getUserByName(name) != null) {
-            printReturnToPrevious("이미 등록된 ID입니다.");
+            System.out.println("이미 등록된 ID입니다.");
+            loading(2000);
             return;
         }
         user.setName(name);

@@ -77,7 +77,8 @@ public class AppointmentController {
         if(!memberList.isEmpty()) {
             setDate();
         } else {
-            printReturnToPrevious("추가한 멤버가 없습니다.");
+            System.out.println("추가한 멤버가 없습니다.");
+            loading(2000);
         }
     }
 
@@ -152,7 +153,8 @@ public class AppointmentController {
             LinkedList<Plan> availableDates = getAvailableDates(month, lastDay, tempAvailableDates);
 
             if (availableDates.isEmpty()) {
-                printReturnToPrevious("가능한 일정이 없습니다.");
+                System.out.println("가능한 일정이 없습니다.");
+                loading(2000);
                 return;
             }
 
@@ -162,7 +164,8 @@ public class AppointmentController {
                 addAppointment(month);
             }
         } else {
-            printReturnToPrevious("월 입력이 잘못되었습니다.");
+            System.out.println("월 입력이 잘못되었습니다.");
+            loading(2000);
         }
     }
 
