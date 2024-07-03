@@ -44,11 +44,11 @@ public class User {
         this.joinDate = joinDate;
     }
 
-    public LinkedList getPlanList() {
+    public LinkedList<Plan> getPlanList() {
         return planList;
     }
 
-    public void setPlanList(LinkedList planList) {
+    public void setPlanList(LinkedList<Plan> planList) {
         this.planList = planList;
     }
 
