@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Objects;
 
 import static bitcamp.project2.util.Prompt.*;
 
@@ -20,6 +21,22 @@ public class AppointmentController {
     LinkedList<String> appointmentList = new LinkedList<>();
     String appointment = "";
 
+//    public class Plan
+//        private int no;
+//        private String title;
+//        private Date startDate;
+//        private Date endDate;
+//        private String repeatedDays;
+//
+//
+//
+//    public class User
+//        private String name;
+//        private String password;
+//        private java.sql.Date joinDate;
+//        private LinkedList planList;
+
+
 
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
@@ -27,6 +44,7 @@ public class AppointmentController {
     AppointmentController(){
 
     }
+
 
 
     ///////////////////////////////////////////////////////////
@@ -48,6 +66,7 @@ public class AppointmentController {
     public static void freeInstance() {
         m = null;
     }// Method freeInstance END
+
 
 
     ///////////////////////////////////////////////////////////
@@ -310,8 +329,14 @@ public class AppointmentController {
         System.out.println(line);
     }
 
-    public LinkedList<String> getAppointmentList() {
-        return appointmentList;
+    private User getUserByName(String name) {
+        for (User user : userList) {
+            if (Objects.equals(name, user.getName())) {
+                return user;
+            }
+        }
+
+        return null;
     }
 
     public void updateUserName(String oldName, String newName) {
@@ -320,6 +345,27 @@ public class AppointmentController {
                 appointmentList.set(i, appointmentList.get(i).replace(oldName, newName));
             }
         }
+    }
+
+    ///////////////////////////////////////////////////////////
+    ///////////////// public getter, setter ///////////////////
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    //////////////////////// ---------- ///////////////////////
+    ////////////////////////// ------ /////////////////////////
+    //////////////////////////// -- ///////////////////////////
+    ///////////////////////////////////////////////////////////
+
+
+    public void setAppointmentList(LinkedList<String> appointmentList) {
+        this.appointmentList = appointmentList;
+    }
+
+    public LinkedList<String> getAppointmentList() {
+        return appointmentList;
     }
 
 }//Class AppointmentController END

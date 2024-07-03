@@ -117,7 +117,10 @@ public class Prompt {
   }
 
   // Program Exit
-  public static void printProgramExit() { System.out.println("[프로그램을 종료합니다...]"); }
+  public static void printProgramExit() {
+    System.out.println("[프로그램을 종료합니다...]");
+//    loading(2000);
+  }
 
   // Disaccord PassWord
   public static void printDisaccordPW() { System.out.println("[비밀번호가 잘못되었습니다.]"); }
@@ -129,7 +132,10 @@ public class Prompt {
   public static void printDisaccordLogin() { System.out.println("[ID PW를 다시 확인해주세요.]\n\n"); }
 
   //Success LogIn
-  public static void printSuccessLogin() {System.out.print("[로그인 되었습니다.]\n\n");}
+  public static void printSuccessLogin() {
+    System.out.print("[로그인 되었습니다.]\n\n");
+    loading(2000);
+  }
 
   //[ERROR]
   private static String printError(){ return "[ERROR) "; }
@@ -140,6 +146,21 @@ public class Prompt {
   public static void printBuff(){
     for(int i=0;i<35;i++) {
       System.out.print("\n");
+    }
+  }
+
+  //loading (...)
+  public static void loading(long time){
+    long sz = time/1000;
+    try {
+      for(int i=0;i<sz;i++) {
+//        System.out.print(".");
+        Thread.sleep(time/sz);
+      }
+      System.out.print("\n");
+    } catch (InterruptedException e) {
+      // TODO Auto-generated catch block
+      // e.printStackTrace();
     }
   }
 
