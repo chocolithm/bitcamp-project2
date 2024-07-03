@@ -262,8 +262,13 @@ public class AppointmentController {
 
     public void addAppointment(int month) {
         Plan plan = new Plan();
+        int titleLen;
+        String strLen;
+
         plan.setTitle(Prompt.input("제목? "));
-        appointment += plan.getTitle() + getTabByString(plan.getTitle(), 12);
+        titleLen = getlengthWord(plan.getTitle());
+        strLen = "%-"+ (15-titleLen/2) +"s ";
+        appointment += String.format(strLen,plan.getTitle());
 
         addDates(plan, month);
 
@@ -310,18 +315,32 @@ public class AppointmentController {
         plan.setRepeatedDays(repeatedDays);
 
         if(startDate.equals(endDate)) {
-            appointment += formatter.format(plan.getStartDate());
+            appointment += printFormatterDate(formatter.format(plan.getStartDate()));
+//            appointment += formatter.format(plan.getStartDate());
         } else {
-            appointment += formatter.format(plan.getStartDate()) + " ~ " + formatter.format(plan.getEndDate());
+            appointment += printFormatterDate(formatter.format(plan.getStartDate()), formatter.format(plan.getEndDate()), repeatedDays);
+//            appointment += formatter.format(plan.getStartDate()) + " ~ " + formatter.format(plan.getEndDate());
         }
 
-        appointment += getTabByString(appointment, 28);
+    }
+
+    private String printFormatterDate(String start){
+        return String.format("%-5s   %-5s %-14s", start, " "," ");
+    }
+
+    private String printFormatterDate(String start, String end, String repeatedDays){
+        if(repeatedDays==null){
+            repeatedDays = " ";
+        }
+        int repeatLen = getlengthWord(repeatedDays);
+        String str = "%-5s ~ %-5s %-"+(14-repeatLen/2)+"s";
+        return String.format(str, start, end, repeatedDays);
     }
 
     private void listAvailableDates(LinkedList<Plan> availableDates) {
-        String line = "--------------------------------------------------";
-        System.out.println(line);
-        System.out.println("No\t\tDate");
+//        String line = "--------------------------------------------------";
+        System.out.print(printLine());
+        System.out.printf("%3s. %-15s\n", "No", "Date");
         for(int i = 0; i < availableDates.size(); i++) {
             Plan plan = availableDates.get(i);
             String date = "";
@@ -335,9 +354,9 @@ public class AppointmentController {
                 date = startDate + " ~ " + endDate;
             }
 
-            System.out.printf("%d.\t\t%s\n", (i + 1), date);
+            System.out.printf("%3d. %-15s\n", (i + 1), date);
         }
-        System.out.println(line);
+        System.out.println(printLine());
     }
 
     private User getUserByName(String name) {
@@ -361,11 +380,13 @@ public class AppointmentController {
     public static String getTabByString(String str, int num) {
         int count = 0;
         int len = str.length();
+
         Pattern pattern = Pattern.compile("[가-힣]");
         Matcher matcher = pattern.matcher(str);
         while (matcher.find()) {
             count++;
         }
+
         return "\t".repeat(((num - count - len + 3) / 4));
     }//Method getTabByString END
 

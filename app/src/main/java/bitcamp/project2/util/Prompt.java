@@ -1,8 +1,10 @@
 package bitcamp.project2.util;
 
+import java.io.UnsupportedEncodingException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Prompt {
 
@@ -143,11 +145,52 @@ public class Prompt {
   //Line
   public static String printLine(){ return "++-----------------------------------------------------------------------++\n"; }
 
+
   public static void printBuff(){
     for(int i=0;i<35;i++) {
       System.out.print("\n");
     }
   }
+
+  ///////////////////////////////////////////////////////////
+  /////////////////////// print List ////////////////////////
+  ///////////////////////////////////////////////////////////
+  public static String dummyFormat(String title, String start, String end, String repeat, String mem){
+    int titleLen = getlengthWord(title);
+    int repeatLen = getlengthWord(repeat);
+    String str ="";
+
+    System.out.println(title+")"+"titleLen: "+titleLen+" repeatLen: "+repeatLen+"\n");
+    if(end.equals(" ")){
+      str = "%-"+ (15-titleLen/2) +"s %-5s   %-5s %-"+(14-repeatLen/2)+"s %-20s";
+      return String.format(str, title, start, end, repeat, mem);
+    }else{
+      str = "%-"+ (15-titleLen/2) +"s %-5s ~ %-5s %-"+(14-repeatLen/2)+"s %-20s";
+      return String.format(str, title, start, end, repeat, mem);
+    }
+  }
+
+  public static int getlengthWord(String word){
+    if(!getType(word)) {
+      try {
+        return word.getBytes("euc-kr").length;
+      } catch (UnsupportedEncodingException e) {
+        return 0;
+      }
+    }
+    return 0;
+  }
+
+
+  public static boolean getType(String word){
+    return Pattern.matches("^[a-zA-Z]*$", word);
+  }
+
+
+
+
+
+
 
   //loading (...)
   public static void loading(long time){
