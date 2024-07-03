@@ -19,10 +19,21 @@ public class Prompt {
   //////////////////////// printMenu ////////////////////////
   ///////////////////////////////////////////////////////////
 
+  public static String printMenu(){
+    String[] menus = mainMenus;
+    for (int i = 0; i < menus.length; i++) {
+      System.out.printf("[%1d] %-8s\t", (i + 1), menus[i]);
+    }
+    System.out.println("[0] 이전");
+
+    return Prompt.input(String.format("메인>"));
+  }
+
+
   public static String printSubMenu(String menuTitle, int ans){
     String[] menus = subMenus[ans - 1];
     for (int i = 0; i < menus.length; i++) {
-      System.out.printf("[%d] %s\t", (i + 1), menus[i]);
+      System.out.printf("[%1d] %-8s\t", (i + 1), menus[i]);
     }
     System.out.println("[0] 이전");
 
@@ -89,6 +100,7 @@ public class Prompt {
   ///////////////////////////////////////////////////////////
   ///////////////////////// print ///////////////////////////
   ///////////////////////////////////////////////////////////
+
   // [ERROR message] if system.in doesn't get Number
   public static void printNumberFormatException() {
     System.out.println( printError()+"숫자로 입력해주세요.");
@@ -100,11 +112,31 @@ public class Prompt {
   }
 
   // Program Exit
-  public static void printProgramExit() { System.out.println("프로그램을 종료합니다..."); }
+  public static void printProgramExit() { System.out.println("[프로그램을 종료합니다...]"); }
 
   // Disaccord PassWord
-  public static void printDisaccordPW() { System.out.println("비밀번호가 잘못되었습니다."); }
+  public static void printDisaccordPW() { System.out.println("[비밀번호가 잘못되었습니다.]"); }
+
+  // Disaccord ID
+  public static void printDisaccordID() { System.out.println("[존재하지 않는 사용자입니다.]"); }
+
+  // Disaccord LogIn
+  public static void printDisaccordLogin() { System.out.println("[ID PW를 다시 확인해주세요.]\n\n"); }
+
+  //Success LogIn
+  public static void printSuccessLogin() {System.out.print("[로그인 되었습니다.]\n\n");}
 
   //[ERROR]
   private static String printError(){ return "[ERROR] "; }
+
+  //Line
+  public static String printLine(){ return "++-------------------------------------------------------------++\n"; }
+
+  public static void printBuff(){
+    for(int i=0;i<30;i++) {
+      System.out.print("\n");
+    }
+  }
+
+
 }

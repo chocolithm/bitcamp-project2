@@ -65,10 +65,10 @@ public class PlanController{
     }
 
     public void listPlan() {
-        String line = "--------------------------------------------------";
+//        String line = printLine();
 
         if(!planList.isEmpty()) {
-            System.out.println(line);
+            System.out.print(printLine());
             System.out.println("No\t\tTitle\t\t\t\tDate");
             for(int i = 0; i < planList.size(); i++) {
                 Plan plan = planList.get(i);
@@ -87,7 +87,7 @@ public class PlanController{
                 }
                 System.out.printf("%d.\t\t%s%s%s\n", (i + 1), plan.getTitle(), getTabByString(plan.getTitle()), date);
             }
-            System.out.println(line);
+            System.out.print(printLine()+"\n");
         }
     }
 

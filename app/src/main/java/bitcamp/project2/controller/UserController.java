@@ -6,6 +6,8 @@ import bitcamp.project2.vo.User;
 import java.sql.Date;
 import java.util.LinkedList;
 
+import static bitcamp.project2.util.Prompt.printLine;
+
 public class UserController {
     static LinkedList<User> userList = new LinkedList<>();
 
@@ -57,16 +59,16 @@ public class UserController {
     }
 
     public void listUser() {
-        String line = "--------------------------";
+//        String line = printLine();
 
         if(!userList.isEmpty()) {
-            System.out.println(line);
+            System.out.print(printLine());
             System.out.println("No\t\tName");
             for(int i = 0; i < userList.size(); i++) {
                 User user = userList.get(i);
                 System.out.printf("%d.\t\t%s\n", (i + 1), user.getName());
             }
-            System.out.println(line);
+            System.out.print(printLine()+"\n");
         }
     }
 

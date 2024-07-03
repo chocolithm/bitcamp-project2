@@ -77,35 +77,41 @@ public class Membership {
     private String membershipGuide(){
         String str = "";
 
-        str += "[야! 먹자]\n";
-
-        str+= "\n" +
-                "⣋⢏⢝⢍⡫⡹⡩⡫⣙⢝⡙⡝⣝⡙⡝⡝⡝⡝⡝⡝⡝⡝⡝⡝⡝\n" +
-                "⡘⣆⢣⢣⢪⢪⢪⢪⢪⢪⢪⠪⣆⢝⢜⢜⢜⢜⢜⢜⡜⣪⢪⢎⢞\n" +
-                "⢎⠦⡣⡣⡣⡣⡣⡣⡣⡣⡣⡳⢌⢮⢪⢕⢕⢕⢕⢕⢎⠮⡲⡱⡣\n" +
-                "⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢕⢝⡪⡲⡱⡕⡕⡵⡱⡣⡫⣪⢣⢝⡪\n" +
-                "⡱⡱⡱⡱⣅⠀⠑⣕⢕⠵⠁⠀⣜⢎⠊⠈⠀⠈⠘⠜⣕⠵⡱⣕⢝\n" +
-                "⡪⡪⡪⡪⡪⡆⠀⠸⡪⠃⠀⣰⢣⠂⢀⡼⣙⠶⡄⠀⢱⢝⢮⢪⢎\n" +
-                "⡘⡎⢮⢪⡪⡺⡀⠀⠋⠀⣰⢣⡳⠀⠀⢗⡕⣝⠎⠀⢘⡎⡧⡳⡹\n" +
-                "⡩⡪⡣⡳⢜⡜⡵⡀⠀⢰⢕⡕⣝⢥⡀⡀⠈⢀⢀⠀⢘⢮⡪⡳⡹\n" +
-                "⡱⣙⢜⡜⡕⢮⡊⠀⢠⢏⢮⢪⢎⢮⡹⣜⡣⣳⡙⡮⡪⡧⣹⢪⡳\n" +
-                "⢕⠵⡱⣪⡙⣎⣠⣀⢯⡪⡳⡱⣣⠳⡕⡮⡺⣔⢝⡼⡱⣕⢵⡣⣫\n" +
-                "⢪⡓⡝⢦⢫⡪⡲⡕⡵⡱⣝⢜⡕⣏⢞⢎⡞⣜⢕⡝⡮⣪⢮⡪⣳\n" +
-                "⢪⢎⡝⣎⢧⡹⡪⡺⡜⡵⡪⢧⡹⡜⡵⡹⡪⣎⢧⡫⡺⣜⢖⡝⡼\n" +
-                "⢕⢇⢗⢼⡢⣫⢺⡱⣝⢼⡱⣣⡫⡺⣕⢝⢮⡪⡞⡼⣱⢣⢏⢮⡫\n\n";
+        str += printMembershipTUI();
+//        str += "[야! 먹자]\n";
 
         str += "[1] 로그인       [2] 회원가입        [0] 종료\n";
 
         return str;
     }
 
+    private String printMembershipTUI(){
+        String str = "";
+
+        str+= "\n\n++-------------------------------------------------------------++\n" +
+                "++-------------------------------------------------------------++\n" +
+                "||                                                             ||\n" +
+                "||          ____    ____  ___        __                        ||\n" +
+                "||          \\   \\  /   / /   \\      |  |                       ||\n" +
+                "||           \\   \\/   / /  ^  \\     |  |                       ||\n" +
+                "||            \\_    _/ /  /_\\  \\    |  |                       ||\n" +
+                "||              |  |  /  _____  \\   |__|                       ||\n" +
+                "||              |__| /__/     \\__\\  (__)  밥한번 먹자!!        ||\n" +
+                "||                                                             ||\n" +
+                "||                                                             ||\n" +
+                "||                                             강윤상, 이선아  ||\n" +
+                "++-------------------------------------------------------------++\n" +
+                "++-------------------------------------------------------------++\n\n";
+
+        return str;
+    }
 
     private boolean membershipMenu(){
         String ans = ""; // user answer
         
         for (;;) {
             System.out.print(membershipGuide());
-            System.out.print("\n메인 : ");
+            System.out.print("\n> ");
             ans = getUserScanner();
 
             switch (ans){
@@ -142,15 +148,14 @@ public class Membership {
             pw = getUserScanner();
             if(EqualUserPW(pw)){
                 this.password = pw;
-                System.out.print("로그인 되었습니다.\n\n");
+                printSuccessLogin();
                 return true;
             }
-
         }
 
         this.name = "";
         this.password = "";
-        System.out.print("ID PW를 다시 확인해주세요.\n\n");
+        printDisaccordLogin();
         return false;
     }//Method login END
 

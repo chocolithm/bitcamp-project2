@@ -65,8 +65,8 @@ public class Menu {
         String ans = "";
 
         for(;;){
-            printMainMenu();
-            ans = getUserScanner();
+            printBuff();
+            ans = printMainMenu();
 
             switch (ans){
                 case "1":   //내 일정
@@ -90,32 +90,66 @@ public class Menu {
     }
 
 
-    private void printMainMenu(){
-        String str = "";
-        str += printMainTUI();
-        str += printMainMenuList();
-        System.out.println(str);
+    private String printMainMenu(){
+        System.out.print(printMainTUI());
+        return printMenu();
     }//Method menu END
 
     private String printMainTUI(){
         String str = "";
 
-        str += "-----------------------------------------------------------------------\n";
-        str += "           야! 이날에먹자          \n";
-        str += "print List\n";
-        str += "-----------------------------------------------------------------------\n";
+//        str += "-----------------------------------------------------------------------\n";
+
+        str += printMainMenuTUITop();
+        
+        str +=    String.format("      - %-40s\n", "printList1") ;
+        str +=    String.format("      - %-40s\n", "printList2") ;
+        str +=    String.format("      - %-40s\n", "printList3") ;
+        str +=    String.format("      - %-40s\n", "printList4") ;
+        str +=    String.format("      - %-40s\n", "printList5") ;
+
+        str += printMainMenuTUIBottom();
+
+
+//        str += "print List\n";
+//        str += "-----------------------------------------------------------------------\n";
 
         return str;
     }//Method printTUI END
 
-    private String printMainMenuList(){
+    private String printMainMenuTUITop(){
         String str = "";
 
-        str += "[1] 내 일정        [2] 약속 추가       [3] 사용자관리       [0] 종료\n";
-        
-        
+        str +=  printLine() +
+                printLine() +
+                "                                                                 \n" +
+                "                   __  __        __                              \n" +
+                "                   \\ \\/ /__ _   / /                              \n" +
+                "                    \\  / _ `/  /_/                               \n" +
+                "                    /_/\\_,_/  (_)    이날에 먹자!                \n" +
+                "                                                                 \n" ;
+
         return str;
-    }//Method printMenu END
+    }
+
+    private String printMainMenuTUIBottom(){
+        String str = "";
+
+        str +=  "\n" +
+                printLine() +
+                printLine() +
+                "\n";
+
+        return str;
+    }
+
+//    private String printMainMenuList(){
+//        String command = printMenu();
+////        str += "[1] 내 일정        [2] 약속 추가       [3] 사용자관리       [0] 종료\n";
+//
+//
+//        return str;
+//    }//Method printMenu END
 
 
     ///////////////////////// 1. 내 일정 ////////////////////////
@@ -124,7 +158,8 @@ public class Menu {
         PlanController planController = PlanController.getInstance(user);
 
         String menuTitle = "내 일정";
-        System.out.println("[내 일정]");
+        System.out.print(printLine());
+        System.out.println("                            내 일정");
 
         while (true) {
             planController.listPlan();
