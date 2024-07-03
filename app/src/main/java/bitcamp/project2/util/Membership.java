@@ -14,6 +14,7 @@ public class Membership {
 
      String name;
      String password;
+     static int loginUserNo = -1;
 
     ///////////////////////////////////////////////////////////
     ////////////////////// Constructor ////////////////////////
@@ -59,6 +60,19 @@ public class Membership {
         return membershipMenu();
     }
 
+    private int getLoginUserNo(){
+        Iterator<User> iter = userList.iterator();
+        User currentUser = null;
+        int userNo = 0;
+        while(iter.hasNext()) {
+            currentUser = iter.next();
+
+            if (this.name.equals(currentUser.getName()))
+                return userNo;
+            userNo++;
+        }
+        return -1;
+    }
 
     private String membershipGuide(){
         String str = "";
@@ -81,7 +95,8 @@ public class Membership {
             switch (ans){
                 case "1": //login
                     if(login()){
-                       return true;
+                        this.loginUserNo = getLoginUserNo();
+                        return true;
                     }else{
                         continue;
                     }

@@ -3,6 +3,7 @@ package bitcamp.project2.controller;
 import bitcamp.project2.util.Menu;
 import bitcamp.project2.util.Prompt;
 import bitcamp.project2.vo.Plan;
+import bitcamp.project2.vo.User;
 
 import java.sql.Date;
 import java.time.DayOfWeek;
@@ -14,8 +15,9 @@ import java.util.regex.Pattern;
 
 import static bitcamp.project2.util.Prompt.*;
 
-public class PlanController {
+public class PlanController{
     LinkedList<Plan> planList = new LinkedList<>();
+//      LinkedList<Plan> planList;
 
     ///////////////////////////////////////////////////////////
     ////////////////////// getInstance() //////////////////////
@@ -23,10 +25,10 @@ public class PlanController {
     private static PlanController m;
 
     // setup Menu Instance
-    public static PlanController getInstance() {
+    public static PlanController getInstance(User user) {
 
         if (m == null) {
-            m = new PlanController();
+            m = new PlanController(user);
         }
 
         return m;
@@ -37,6 +39,10 @@ public class PlanController {
         m = null;
     }// Method freeInstance END
 
+
+    PlanController(User user){
+        this.planList.addAll(user.getPlanList());
+    }
 
 
 

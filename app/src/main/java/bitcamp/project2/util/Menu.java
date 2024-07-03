@@ -3,7 +3,7 @@ package bitcamp.project2.util;
 import bitcamp.project2.controller.AppointmentController;
 import bitcamp.project2.controller.PlanController;
 import bitcamp.project2.controller.UserController;
-
+import bitcamp.project2.vo.User;
 import static bitcamp.project2.util.Prompt.*;
 
 public class Menu {
@@ -121,7 +121,8 @@ public class Menu {
 
     ///////////////////////// 1. 내 일정 ////////////////////////
     private void myToDoMenu(int ans){
-        PlanController planController = new PlanController();
+        User user = UserController.getInstance().getUserList().get(Membership.loginUserNo);
+        PlanController planController = PlanController.getInstance(user);
 
         String menuTitle = "내 일정";
         System.out.println("[내 일정]");
