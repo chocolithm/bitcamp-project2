@@ -117,10 +117,10 @@ public class DummyData {
 
     private static void addDummyAppoint(){
         LinkedList<String> appointmentList = AppointmentController.getInstance().getAppointmentList();
-        appointmentList.add("프로젝트   06/24              ( 윤상, 선아 )");
-        appointmentList.add("가족모임   07/01 ~ 07/3       ( OREO )");
-        appointmentList.add("회의       08/01 ~ 08/31 월   ( root )");
-        appointmentList.add("캠핑       08/24 ~ 08/31      ( OREO, 윤상, 선아 )");
+        appointmentList.add("프로젝트    06/24                ( 윤상, 선아 )");
+        appointmentList.add("가족모임    07/01 ~ 07/3         ( OREO )");
+        appointmentList.add("회의        08/01 ~ 08/31 월     ( root )");
+        appointmentList.add("캠핑        08/24 ~ 08/31        ( OREO, 윤상, 선아 )");
 
         AppointmentController.getInstance().setAppointmentList(appointmentList);
     }

@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static bitcamp.project2.util.Prompt.*;
 
@@ -258,7 +260,7 @@ public class AppointmentController {
     public void addAppointment(int month) {
         Plan plan = new Plan();
         plan.setTitle(Prompt.input("제목? "));
-        appointment += plan.getTitle() + " ";
+        appointment += plan.getTitle() + getTabByString(plan.getTitle(), 12);
 
         addDates(plan, month);
 
@@ -308,6 +310,8 @@ public class AppointmentController {
         } else {
             appointment += formatter.format(plan.getStartDate()) + " ~ " + formatter.format(plan.getEndDate());
         }
+
+        appointment += getTabByString(appointment, 28);
     }
 
     private void listAvailableDates(LinkedList<Plan> availableDates) {
@@ -349,6 +353,17 @@ public class AppointmentController {
             }
         }
     }
+
+    public static String getTabByString(String str, int num) {
+        int count = 0;
+        int len = str.length();
+        Pattern pattern = Pattern.compile("[가-힣]");
+        Matcher matcher = pattern.matcher(str);
+        while (matcher.find()) {
+            count++;
+        }
+        return "\t".repeat(((num - count - len + 3) / 4));
+    }//Method getTabByString END
 
     ///////////////////////////////////////////////////////////
     ///////////////// public getter, setter ///////////////////
