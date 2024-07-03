@@ -121,6 +121,7 @@ public class PlanController{
 
         planList.add(plan);
         System.out.println("등록되었습니다.\n");
+        loading(2000);
     }//Method addPlan END
 
 
@@ -141,13 +142,16 @@ public class PlanController{
                     case 1:
                         plan.setTitle(Prompt.input("'%s' 이름 변경 : ", plan.getTitle()));
                         System.out.println("수정되었습니다.\n");
+                        loading(2000);
                         break;
                     case 2:
                         setDates(plan);
                         System.out.println("수정되었습니다.\n");
+                        loading(2000);
                         break;
                     default:
                         System.out.println("잘못된 항목입니다.");
+                        loading(2000);
                         break;
                 }
 //                if (command == 1) {
@@ -181,6 +185,7 @@ public class PlanController{
                if (command.equals("Y") || command.equals("y")) {
                    planList.remove(planNo - 1);
                    System.out.printf("'%s' 일정을 삭제했습니다.\n\n", plan.getTitle());
+                   loading(2000);
                }
            }//Method isValidatePlan END
        }//Method isValidatePlanList END
@@ -287,6 +292,7 @@ public class PlanController{
     private boolean isValidatePlanList(){
         if(planList.isEmpty()) {
             System.out.println("현재 등록된 일정이 없습니다.\n");
+            loading(2000);
             return false;
         }
         return true;
@@ -300,6 +306,7 @@ public class PlanController{
     private boolean isValidatePlan(int planNo) {
         if(planNo < 1 || planNo > planList.size()) {
             System.out.println("없는 일정입니다.\n");
+            loading(2000);
             return false;
         } else {
             return true;

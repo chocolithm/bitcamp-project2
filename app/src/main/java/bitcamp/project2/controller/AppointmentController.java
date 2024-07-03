@@ -100,12 +100,15 @@ public class AppointmentController {
                 if(!isDuplicateMember(ans)){
                     System.out.printf("'%s'님을 추가합니다. \n", ans);
                     memberList.add(ans);
+                    loading(2000);
                     continue;
                 }
                 System.out.print("이미 존재하는 멤버입니다. \n");
+                loading(2000);
                 continue;
             }
             System.out.print("존재하지 않는 멤버입니다. \n");
+            loading(2000);
         }
 
     }
@@ -279,6 +282,7 @@ public class AppointmentController {
         appointment = "";
 
         System.out.println("등록되었습니다.\n");
+        loading(2000);
     }
 
     public void addDates(Plan plan, int month) {
