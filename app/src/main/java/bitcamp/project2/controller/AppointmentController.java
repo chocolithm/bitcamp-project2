@@ -18,6 +18,8 @@ public class AppointmentController {
 
     LinkedList<User> userList = uc.getUserList();
     LinkedList<String> memberList = new LinkedList<String>();
+    LinkedList<String> appointmentList = new LinkedList<>();
+    String appointment = "";
 
 //    public class Plan
 //        private int no;
@@ -232,13 +234,22 @@ public class AppointmentController {
         if(Prompt.input("일정을 등록하시겠습니까?(y/n)").equalsIgnoreCase("y")) {
             plan = new Plan();
             plan.setTitle(Prompt.input("제목? "));
+            appointment += plan.getTitle() + " ";
 
             setDates(plan, month);
 
+            appointment += " ( ";
+
             for(String str : memberList) {
+                appointment += str + " ";
                 User user = getUserByName(str);
                 user.getPlanList().add(plan);
             }
+
+            appointment += ")";
+            appointmentList.add(appointment);
+            appointment = "";
+
             System.out.println("등록되었습니다.\n");
         }
     }
@@ -261,9 +272,18 @@ public class AppointmentController {
             startDate = endDate = String.format("2024-%d-%s", month, days.split(" ")[0]);
         }
 
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd");
+
         plan.setStartDate(Date.valueOf(startDate));
         plan.setEndDate(Date.valueOf(endDate));
         plan.setRepeatedDays(repeatedDays);
+
+        if(startDate != endDate) {
+            appointment += formatter.format(plan.getStartDate()) + " ~ " + formatter.format(plan.getEndDate());
+        } else {
+            appointment += formatter.format(plan.getStartDate());
+        }
+
     }
 
     private void listAvailableDates(LinkedList<Plan> availableDates) {
@@ -296,6 +316,10 @@ public class AppointmentController {
         }
 
         return null;
+    }
+
+    public LinkedList<String> getAppointmentList() {
+        return appointmentList;
     }
 
 }//Class AppointmentController END

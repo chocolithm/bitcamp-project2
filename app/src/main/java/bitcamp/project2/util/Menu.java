@@ -4,6 +4,9 @@ import bitcamp.project2.controller.AppointmentController;
 import bitcamp.project2.controller.PlanController;
 import bitcamp.project2.controller.UserController;
 import bitcamp.project2.vo.User;
+
+import java.util.LinkedList;
+
 import static bitcamp.project2.util.Prompt.*;
 
 public class Menu {
@@ -101,12 +104,14 @@ public class Menu {
 //        str += "-----------------------------------------------------------------------\n";
 
         str += printMainMenuTUITop();
-        
-        str +=    String.format("      - %-40s\n", "printList1") ;
-        str +=    String.format("      - %-40s\n", "printList2") ;
-        str +=    String.format("      - %-40s\n", "printList3") ;
-        str +=    String.format("      - %-40s\n", "printList4") ;
-        str +=    String.format("      - %-40s\n", "printList5") ;
+
+        LinkedList<String> appointmentList = AppointmentController.getInstance()
+            .getAppointmentList();
+        if(!appointmentList.isEmpty()) {
+            for (int i = 0; i < appointmentList.size(); i++) {
+                str += "\t\t" + appointmentList.get(i) + "\n";
+            }
+        }
 
         str += printMainMenuTUIBottom();
 
