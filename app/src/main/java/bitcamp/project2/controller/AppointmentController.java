@@ -9,10 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Objects;
 
 import static bitcamp.project2.util.Prompt.*;
-import static bitcamp.project2.util.Prompt.printReturnToMain;
+import static bitcamp.project2.util.Prompt.printReturnToPrevious;
 
 public class AppointmentController {
     UserController uc = UserController.getInstance();
@@ -60,7 +59,7 @@ public class AppointmentController {
         if(!memberList.isEmpty()) {
             setDate();
         } else {
-            printReturnToMain("추가한 멤버가 없습니다.");
+            printReturnToPrevious("추가한 멤버가 없습니다.");
         }
     }
 
@@ -135,7 +134,7 @@ public class AppointmentController {
             LinkedList<Plan> availableDates = getAvailableDates(month, lastDay, tempAvailableDates);
 
             if (availableDates.isEmpty()) {
-                printReturnToMain("가능한 일정이 없습니다.");
+                printReturnToPrevious("가능한 일정이 없습니다.");
                 return;
             }
 
@@ -145,7 +144,7 @@ public class AppointmentController {
                 addAppointment(month);
             }
         } else {
-            printReturnToMain("월 입력이 잘못되었습니다.");
+            printReturnToPrevious("월 입력이 잘못되었습니다.");
         }
     }
 
@@ -182,7 +181,7 @@ public class AppointmentController {
         int[] tempAvailableDates = new int[lastDay];
 
         for (int i = 0; i < memberList.size(); i++) {
-            User user = getUserByName(memberList.get(i));
+            User user = uc.getUserByName(memberList.get(i));
             if(user.getPlanList() != null) {
                 for (int j = 0; j < user.getPlanList().size(); j++) {
                     Plan plan = user.getPlanList().get(j);
@@ -246,7 +245,7 @@ public class AppointmentController {
 
         for(String str : memberList) {
             appointment += str + " ";
-            User user = getUserByName(str);
+            User user = uc.getUserByName(str);
             user.getPlanList().add(plan);
         }
 
@@ -308,16 +307,6 @@ public class AppointmentController {
             System.out.printf("%d.\t\t%s\n", (i + 1), date);
         }
         System.out.println(line);
-    }
-
-    private User getUserByName(String name) {
-        for (User user : userList) {
-            if (Objects.equals(name, user.getName())) {
-                return user;
-            }
-        }
-
-        return null;
     }
 
     public LinkedList<String> getAppointmentList() {

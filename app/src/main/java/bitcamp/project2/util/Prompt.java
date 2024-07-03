@@ -138,9 +138,9 @@ public class Prompt {
     }
   }
 
-  public static void printReturnToMain(String message) {
+  public static void printReturnToPrevious(String message) {
     System.out.println(message);
-    System.out.println("메인으로 돌아갑니다. (엔터)");
+    System.out.println("이전으로 돌아갑니다. (엔터)");
     getUserScanner();
   }
 

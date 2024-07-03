@@ -5,8 +5,9 @@ import bitcamp.project2.vo.User;
 
 import java.sql.Date;
 import java.util.LinkedList;
+import java.util.Objects;
 
-import static bitcamp.project2.util.Prompt.printLine;
+import static bitcamp.project2.util.Prompt.*;
 
 public class UserController {
     static LinkedList<User> userList = new LinkedList<>();
@@ -50,8 +51,14 @@ public class UserController {
 
     public void addUser() {
         User user = new User();
+        String name = Prompt.input("ID? ");
 
-        user.setName(Prompt.input("ID? "));
+        if(getUserByName(name) != null) {
+            printReturnToPrevious("이미 존재하는 ID입니다.");
+            return;
+        }
+
+        user.setName(name);
         user.setPassword(Prompt.input("PW? "));
 
         userList.add(user);
@@ -130,6 +137,16 @@ public class UserController {
         userList.add(new User("선아", "1111", date, null));
         userList.add(new User("무명", "2222", date, null));
         System.out.println("테스트데이터 등록\n");
+    }
+
+    public User getUserByName(String name) {
+        for (User user : userList) {
+            if (Objects.equals(name, user.getName())) {
+                return user;
+            }
+        }
+
+        return null;
     }
 
 
