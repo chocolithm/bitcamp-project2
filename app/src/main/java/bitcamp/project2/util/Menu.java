@@ -91,7 +91,8 @@ public class Menu {
                     userMenu(Integer.parseInt(ans));
                     break;
                 case "0":   //종료
-                    printProgramExit();
+                    // printProgramExit();
+                    menu();
                     return;
                 default:
                     printNumberLimitException();
