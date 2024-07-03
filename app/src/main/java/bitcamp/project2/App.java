@@ -9,7 +9,6 @@ import bitcamp.project2.util.Menu;
 public class App {
     public static void main(String[] args) {
         DummyData.addDummy();
-
         Menu m = Menu.getInstance();
         m.menu();
 
