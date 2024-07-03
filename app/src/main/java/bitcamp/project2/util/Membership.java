@@ -56,14 +56,6 @@ public class Membership {
     ///////////////////////// Method //////////////////////////
     ///////////////////////////////////////////////////////////
     public boolean menu() {
-        /***********************************/
-        User bufuser = new User();
-
-        bufuser.setName("OREO");
-        bufuser.setPassword("0000");
-        this.userList.add(bufuser);
-        /***********************************/
-
         return membershipMenu();
     }
 

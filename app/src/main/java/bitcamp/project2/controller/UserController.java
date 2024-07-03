@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.LinkedList;
 
 public class UserController {
-    LinkedList<User> userList = new LinkedList<>();
+    static LinkedList<User> userList = new LinkedList<>();
 
     ///////////////////////////////////////////////////////////
     ////////////////////// getInstance() //////////////////////

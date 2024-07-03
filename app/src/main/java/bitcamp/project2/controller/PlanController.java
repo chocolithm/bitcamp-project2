@@ -40,6 +40,7 @@ public class PlanController {
 
 
 
+
     public void executePlanCommand(String subMenuNo) { // 나중에 title로 수정
         switch(subMenuNo) {
             case "1" :

@@ -3,11 +3,13 @@
  */
 package bitcamp.project2;
 
+import bitcamp.project2.controller.UserController;
 import bitcamp.project2.util.Menu;
 
 public class App {
     public static void main(String[] args) {
-
+        DummyData.addDummy();
+        System.out.println(UserController.getInstance().getUserList().get(0).getPlanList().get(0));
         Menu m = Menu.getInstance();
         m.menu();
 

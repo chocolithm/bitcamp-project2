@@ -7,13 +7,13 @@ public class User {
     private String name;
     private String password;
     private Date joinDate;
-    private LinkedList planList;
+    private static LinkedList<Plan> planList;
 
     public User() {
 
     }
 
-    public User(String name, String password, Date joinDate, LinkedList planList) {
+    public User(String name, String password, Date joinDate, LinkedList<Plan> planList) {
         this.name = name;
         this.password = password;
         this.joinDate = joinDate;
