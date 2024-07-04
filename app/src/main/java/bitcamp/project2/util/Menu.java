@@ -115,8 +115,14 @@ public class Menu {
         LinkedList<String> appointmentList = AppointmentController.getInstance()
             .getAppointmentList();
         if(!appointmentList.isEmpty()) {
+            String appointment = "";
+            String loginUser = Membership.getInstance().getName();
+            str += String.format("                      '%s' 님 환영합니다.\n\n", loginUser);
             for (int i = 0; i < appointmentList.size(); i++) {
-                str += "\t\t" + appointmentList.get(i) + "\n";
+                appointment = appointmentList.get(i);
+                if(appointment.contains(loginUser)) {
+                    str += "\t\t" + appointment + "\n";
+                }
             }
         }
 

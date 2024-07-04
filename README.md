@@ -20,9 +20,10 @@ Package vo
 
   ## Class Plan
   int no;
+  String title;
   Date startDate;
   Date dueDate;
-  String title;
+  String repeatedDays;
 
 Package controller
   ## Class UserController

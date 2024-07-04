@@ -127,9 +127,9 @@ public class DummyData {
     private static void addDummyAppoint(){
         LinkedList<String> appointmentList = AppointmentController.getInstance().getAppointmentList();
 
-        appointmentList.add(dummyFormat("프로젝트","06/24"," ", "월수금", "( 윤상, 선아 )"));
-        appointmentList.add(dummyFormat("술약속", "07/01", "07/03", "", "( OREO )"));
-        appointmentList.add(dummyFormat("meeting", "08/01", "08/31", "월", "( root )"));
+        appointmentList.add(dummyFormat("프로젝트","06/24"," ", "", "( 윤상, 선아 )"));
+        appointmentList.add(dummyFormat("술약속", "07/01", "07/03", "", "( OREO, root )"));
+        appointmentList.add(dummyFormat("meeting", "08/05", "08/12", "월", "( root, 윤상 )"));
         appointmentList.add(dummyFormat("camp", "08/24", "08/31", "", "( OREO, 윤상, 선아 )"));
 
         AppointmentController.getInstance().setAppointmentList(appointmentList);
