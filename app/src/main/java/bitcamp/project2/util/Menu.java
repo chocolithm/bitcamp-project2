@@ -109,15 +109,16 @@ public class Menu {
 
     private String printMainTUI(){
         String str = "";
+        String loginUser = Membership.getInstance().getName();
 
         str += printMainMenuTUITop();
+
+        str += String.format("                      '%s' 님 환영합니다.\n\n", loginUser);
 
         LinkedList<String> appointmentList = AppointmentController.getInstance()
             .getAppointmentList();
         if(!appointmentList.isEmpty()) {
             String appointment = "";
-            String loginUser = Membership.getInstance().getName();
-            str += String.format("                      '%s' 님 환영합니다.\n\n", loginUser);
             for (int i = 0; i < appointmentList.size(); i++) {
                 appointment = appointmentList.get(i);
                 if(appointment.contains(loginUser)) {
