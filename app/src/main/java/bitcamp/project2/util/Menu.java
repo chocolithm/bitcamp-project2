@@ -113,7 +113,7 @@ public class Menu {
 
         str += printMainMenuTUITop();
 
-        str += String.format("                      '%s' 님 환영합니다.\n\n", loginUser);
+        str += String.format("                      %s'%s' %s님 환영합니다.%s\n\n", CYAN,loginUser, YAPINK+BOLD, RESET);
 
         LinkedList<String> appointmentList = AppointmentController.getInstance()
             .getAppointmentList();
@@ -137,12 +137,14 @@ public class Menu {
 
         str +=  printLine() +
                 printLine() +
+                YAPINK+BOLD+
                 "                                                                 \n" +
                 "                   __  __        __                              \n" +
                 "                   \\ \\/ /__ _   / /                              \n" +
                 "                    \\  / _ `/  /_/                               \n" +
                 "                    /_/\\_,_/  (_)    이날에 먹자!                \n" +
-                "                                                                 \n" ;
+                "                                                                 \n" +
+                RESET;
 
         return str;
     }//Method printMainMenuTUITop END
@@ -235,7 +237,7 @@ public class Menu {
 
     private void printUserMenuTUI(){
         System.out.print(printLine());
-        System.out.println("                         사용자관리");
+        System.out.println("                              사용자관리");
     }//Method printUserMenuTUI END
 
 }//Class Main END

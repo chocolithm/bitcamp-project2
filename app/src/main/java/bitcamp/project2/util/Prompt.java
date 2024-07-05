@@ -50,9 +50,14 @@ public class Prompt {
 
   public static final String RED = "\033[31m";
   public static final String BLUE = "\033[34m";
-  public static final String YAPINK = "\033[38;5;203m";
+  public static final String YAPINK = "\033[38;5;197m";
+  public static final String CYANBLUE = "\033[38;5;51m";
+  public static final String CYAN = "\033[96m";
+
+  public static final String YAPINK_BACKGROUND = "\033[48;2;247;50;116m";
 
   public static final String RESET = "\033[0m";
+
 
   public static int printCalendar(int year, int month) {
     System.out.println(month + "월");
@@ -161,7 +166,7 @@ public class Prompt {
   private static String printError(){ return "[ERROR) "; }
 
   //Line
-  public static String printLine(){ return "++-----------------------------------------------------------------------++\n"; }
+  public static String printLine(){ return YAPINK+BOLD+"++-----------------------------------------------------------------------++"+RESET+"\n"; }
 
 //console clear
   public static void printBuff(){
@@ -179,7 +184,7 @@ public class Prompt {
     int repeatLen = getlengthWord(repeat);
     String str ="";
 
-    System.out.println(title+")"+"titleLen: "+titleLen+" repeatLen: "+repeatLen+"\n");
+//    System.out.println(title+")"+"titleLen: "+titleLen+" repeatLen: "+repeatLen+"\n");
     if(end.equals(" ")){
       str = "%-"+ (15-titleLen/2) +"s %-5s   %-5s %-"+(14-repeatLen/2)+"s %-20s";
       return String.format(str, title, start, end, repeat, mem);

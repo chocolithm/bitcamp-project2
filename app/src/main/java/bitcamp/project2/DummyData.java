@@ -17,10 +17,10 @@ public class DummyData {
     static final int sz = 4;
 
     public static void addDummy(){
-        System.out.print("가나다라마바사아자차카타파하\n");
-        System.out.print("abcdefghi\n");
-        System.out.print("123456789\n");
-        System.out.print("-----------------------------------------\n");
+//        System.out.print("가나다라마바사아자차카타파하\n");
+//        System.out.print("abcdefghi\n");
+//        System.out.print("123456789\n");
+//        System.out.print("-----------------------------------------\n");
         addDummyUser();
         addDummyAppoint();
     }//Method addDummy END

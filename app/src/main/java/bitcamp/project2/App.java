@@ -9,9 +9,11 @@ import static bitcamp.project2.util.Prompt.printBuff;
 
 public class App {
     public static void main(String[] args) {
-        DummyData.addDummy();
         Menu m = Menu.getInstance();
+
+        DummyData.addDummy();
         printBuff();
+
         m.menu();
     }
 }//Class App END

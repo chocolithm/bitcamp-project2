@@ -86,20 +86,21 @@ public class Membership {
     private String printMembershipTUI(){
         String str = "";
 
-        str+= "\n\n++-----------------------------------------------------------------------++\n" +
+        str+=
+                "\n\n"+YAPINK+BOLD +"++-----------------------------------------------------------------------++\n" +
                 "++-----------------------------------------------------------------------++\n" +
-                "||                                                                       ||\n" +
-                "||               ____    ____  ___        __                             ||\n" +
-                "||               \\   \\  /   / /   \\      |  |                            ||\n" +
-                "||                \\   \\/   / /  ^  \\     |  |                            ||\n" +
-                "||                 \\_    _/ /  /_\\  \\    |  |                            ||\n" +
-                "||                   |  |  /  _____  \\   |__|                            ||\n" +
-                "||                   |__| /__/     \\__\\  (__)  밥한번 먹자!!             ||\n" +
-                "||                                                                       ||\n" +
-                "||                                                                       ||\n" +
-                "||                                                       강윤상, 이선아  ||\n" +
-                "++-----------------------------------------------------------------------++\n" +
-                "++-----------------------------------------------------------------------++\n\n";
+                "||"+RESET+"                                                                       "+YAPINK+BOLD +"||\n" +
+                "||"+RESET+"               ____    ____  ___        __                             "+YAPINK+BOLD +"||\n" +
+                "||"+RESET+"               \\   \\  /   / /   \\      |  |                            "+YAPINK+BOLD +"||\n" +
+                "||"+RESET+"                \\   \\/   / /  ^  \\     |  |                            "+YAPINK+BOLD +"||\n" +
+                "||"+RESET+"                 \\_    _/ /  /_\\  \\    |  |                            "+YAPINK+BOLD +"||\n" +
+                "||"+RESET+"                   |  |  /  _____  \\   |__|                            "+YAPINK+BOLD +"||\n" +
+                "||"+RESET+"                   |__| /__/     \\__\\  (__)  밥한번 먹자!!             "+YAPINK+BOLD +"||\n" +
+                "||"+RESET+"                                                                       "+YAPINK+BOLD +"||\n" +
+                "||"+RESET+"                                                                       "+YAPINK+BOLD +"||\n" +
+                "||"+RESET+"                                                       강윤상, 이선아  "+YAPINK+BOLD +"||\n" +
+                "++-----------------------------------------------------------------------++\n"+
+                "++-----------------------------------------------------------------------++"+RESET+"\n\n";
 
         return str;
     }
@@ -109,7 +110,7 @@ public class Membership {
         
         for (;;) {
             System.out.print(membershipGuide());
-            System.out.print("\n> ");
+            System.out.print(CYAN+"\n> "+RESET);
             ans = getUserScanner();
 
             switch (ans){
@@ -137,12 +138,12 @@ public class Membership {
         String id = ""; // user answer id
         String pw = ""; // user answer pw
 
-        System.out.print("ID? : ");
+        System.out.print(CYAN+"ID? : "+RESET);
         id = getUserScanner();
         if(EqualUserID(id)){
             this.name = id;
 
-            System.out.print("PW? : ");
+            System.out.print(CYAN+"PW? : "+RESET);
             pw = getUserScanner();
             if(EqualUserPW(pw)){
                 this.password = pw;
