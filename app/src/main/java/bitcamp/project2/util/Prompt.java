@@ -18,7 +18,7 @@ public class Prompt {
 
 
   ///////////////////////////////////////////////////////////
-  //////////////////////// printMenu ////////////////////////
+  //////////////////////// print Menu ///////////////////////
   ///////////////////////////////////////////////////////////
 
   public static String printMenu(){
@@ -44,11 +44,19 @@ public class Prompt {
 
 
   ///////////////////////////////////////////////////////////
-  ////////////////////// printCalendar //////////////////////
+  ////////////////////// print Calendar /////////////////////
   ///////////////////////////////////////////////////////////
+  public static final String BOLD = "\033[1m";
+
+  public static final String RED = "\033[31m";
+  public static final String BLUE = "\033[34m";
+  public static final String YAPINK = "\033[38;5;203m";
+
+  public static final String RESET = "\033[0m";
+
   public static int printCalendar(int year, int month) {
     System.out.println(month + "월");
-    System.out.println("일  월  화  수  목  금  토");
+    System.out.println(RED+"일"+RESET+"  월  화  수  목  금  "+BLUE+"토"+RESET);
 
     // 해당 월의 첫 날짜 계산
     LocalDate date = LocalDate.of(year, month, 1);
@@ -63,7 +71,18 @@ public class Prompt {
     // 해당 월의 모든 날짜 출력
     while (date.getMonthValue() == month) {
       // 날짜 출력
-      System.out.printf("%2d  ", date.getDayOfMonth());
+      switch ( date.getDayOfWeek() ){
+        case DayOfWeek.SUNDAY :
+          System.out.printf(RED+"%2d  "+RESET, date.getDayOfMonth());
+          break;
+        case DayOfWeek.SATURDAY:
+          System.out.printf(BLUE+"%2d  "+RESET, date.getDayOfMonth());
+          break;
+        default:
+          System.out.printf("%2d  ", date.getDayOfMonth());
+          break;
+      }
+//      System.out.printf("%2d  ", date.getDayOfMonth());
 
       // 다음 날짜로 이동
       date = date.plusDays(1);
@@ -79,7 +98,6 @@ public class Prompt {
     System.out.println();
     return lastDay;
   }
-
   ///////////////////////////////////////////////////////////
   //////////////////////// Scanner //////////////////////////
   ///////////////////////////////////////////////////////////
@@ -145,7 +163,7 @@ public class Prompt {
   //Line
   public static String printLine(){ return "++-----------------------------------------------------------------------++\n"; }
 
-
+//console clear
   public static void printBuff(){
     for(int i=0;i<35;i++) {
       System.out.print("\n");
@@ -155,6 +173,7 @@ public class Prompt {
   ///////////////////////////////////////////////////////////
   /////////////////////// print List ////////////////////////
   ///////////////////////////////////////////////////////////
+  //dummy format(koean)
   public static String dummyFormat(String title, String start, String end, String repeat, String mem){
     int titleLen = getlengthWord(title);
     int repeatLen = getlengthWord(repeat);
@@ -170,6 +189,7 @@ public class Prompt {
     }
   }
 
+  //check byte(korean)
   public static int getlengthWord(String word){
     if(!getType(word)) {
       try {
@@ -181,9 +201,9 @@ public class Prompt {
     return 0;
   }
 
-
+//get type(english?)
   public static boolean getType(String word){
-    return Pattern.matches("^[a-zA-Z]*$", word);
+    return !Pattern.matches("^[가-힣]*$", word);
   }
 
 
