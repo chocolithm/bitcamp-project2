@@ -112,7 +112,7 @@ public class DummyData {
 
             no = 10*userNo+planNo;
             title = "Project"+ String.format("%03d",no);
-            startDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo) ));
+            startDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo)+7 ));
             endDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo)+14 ));
             repeatedDays = "월";
 
