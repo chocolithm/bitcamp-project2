@@ -5,11 +5,9 @@ import bitcamp.project2.controller.UserController;
 import bitcamp.project2.vo.Plan;
 import bitcamp.project2.vo.User;
 
-import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.regex.Pattern;
 
 import static bitcamp.project2.util.Prompt.dummyFormat;
 
@@ -100,11 +98,11 @@ public class DummyData {
             int planNo=0;
             User user = iter.next();
 
-            for(; planNo<5; planNo++){
+            for(; planNo<3; planNo++){
                 no = 10*userNo+planNo;
                 title = "Project"+ String.format("%03d",no);
                 startDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo)+1 ));
-                endDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo)+3 ));
+                endDate = Date.valueOf(String.format("2024-%d-%s", 7, (userNo+planNo)+2 ));
                 repeatedDays = "";
 
                 planList[userNo].add(new Plan(no, title, startDate, endDate, repeatedDays));
@@ -117,6 +115,10 @@ public class DummyData {
             repeatedDays = "월";
 
             planList[userNo].add(new Plan(no, title, startDate, endDate, repeatedDays));
+            planList[userNo].add(new Plan(no, "데이트", Date.valueOf("2024-07-30"), Date.valueOf("2024-07-30"), ""));
+            planList[userNo].add(new Plan(no, "저녁약속", Date.valueOf("2024-07-25"), Date.valueOf("2024-07-25"), ""));
+            planList[userNo].add(new Plan(no, "가족모임", Date.valueOf("2024-07-28"), Date.valueOf("2024-07-29"), ""));
+
 
             user.setPlanList(planList[userNo]);
         }
@@ -128,9 +130,13 @@ public class DummyData {
         LinkedList<String> appointmentList = AppointmentController.getInstance().getAppointmentList();
 
         appointmentList.add(dummyFormat("프로젝트","06/24"," ", "", "( 윤상, 선아 )"));
-        appointmentList.add(dummyFormat("술약속", "07/01", "07/03", "", "( OREO, root )"));
-        appointmentList.add(dummyFormat("meeting", "08/05", "08/12", "월", "( root, 윤상 )"));
         appointmentList.add(dummyFormat("camp", "08/24", "08/31", "", "( OREO, 윤상, 선아 )"));
+        appointmentList.add(dummyFormat("술약속", "07/25", " ", "", "( OREO, root )"));
+        appointmentList.add(dummyFormat("술약속", "07/27", " ", " ", "( OREO, 윤상 )"));
+        appointmentList.add(dummyFormat("술약속", "07/26", " ", "", "( OREO, 선아 )"));
+        appointmentList.add(dummyFormat("회의", "08/05", "08/25", "월수금", "( root, 윤상 )"));
+        appointmentList.add(dummyFormat("회의", "08/25", "08/25", "화목", "( root, 선아 )"));
+
 
         AppointmentController.getInstance().setAppointmentList(appointmentList);
     }

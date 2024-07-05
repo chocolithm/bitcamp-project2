@@ -48,7 +48,7 @@ public class Prompt {
   ///////////////////////////////////////////////////////////
   public static int printCalendar(int year, int month) {
     System.out.println(month + "월");
-    System.out.println("월  화  수  목  금  토  일");
+    System.out.println("일  월  화  수  목  금  토");
 
     // 해당 월의 첫 날짜 계산
     LocalDate date = LocalDate.of(year, month, 1);
