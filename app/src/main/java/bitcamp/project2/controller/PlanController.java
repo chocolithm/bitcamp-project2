@@ -73,6 +73,7 @@ public class PlanController{
 //        String line = printLine();
 
         if(!planList.isEmpty()) {
+            sortPlan();
             System.out.print(printLine());
             System.out.println("No\t\tTitle\t\t\t\tDate");
             for(int i = 0; i < planList.size(); i++) {
@@ -119,8 +120,6 @@ public class PlanController{
         System.out.println("등록되었습니다.\n");
         loading(1000);
     }//Method addPlan END
-
-
 
 
 
@@ -308,6 +307,24 @@ public class PlanController{
             return true;
         }
     }//Method isValidatePlan END
+
+
+
+
+
+    private void sortPlan() {
+        for (int i = 0; i < planList.size() - 1; i++) {
+            for(int j = i + 1; j < planList.size(); j++) {
+                Date date1 = (Date) planList.get(i).getStartDate();
+                Date date2 = (Date) planList.get(j).getStartDate();
+                if(date1.after(date2)) {
+                    Plan temp = planList.get(i);
+                    planList.set(i, planList.get(j));
+                    planList.set(j, temp);
+                }
+            }
+        }
+    }
 
 //    private void addTestData() {
 //        planList.add(new Plan(1, "가족모임", Date.valueOf("2024-07-01"), Date.valueOf("2024-07-10"), null));
