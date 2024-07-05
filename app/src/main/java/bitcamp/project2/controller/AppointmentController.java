@@ -284,6 +284,8 @@ public class AppointmentController {
         appointmentList.add(appointment);
         appointment = "";
 
+        sortAppointment();
+
         System.out.println("등록되었습니다.\n");
         loading(1000);
     }
@@ -373,6 +375,20 @@ public class AppointmentController {
                 appointmentList.set(i, appointmentList.get(i).replace(oldName, newName));
                 appointmentList.set(i, appointmentList.get(i).replace(" , ", " "));
                 appointmentList.set(i, appointmentList.get(i).replace(",  ", " "));
+            }
+        }
+    }
+
+    public void sortAppointment() {
+        for (int i = 0; i < appointmentList.size() - 1; i++) {
+            for(int j = i + 1; j < appointmentList.size(); j++) {
+                int date1 = Integer.parseInt(appointmentList.get(i).split("\\s+")[1].replace("/", ""));
+                int date2 = Integer.parseInt(appointmentList.get(j).split("\\s+")[1].replace("/", ""));
+                if(date1 > date2) {
+                    String temp = appointmentList.get(i);
+                    appointmentList.set(i, appointmentList.get(j));
+                    appointmentList.set(j, temp);
+                }
             }
         }
     }

@@ -148,13 +148,22 @@ public class Prompt {
   }
 
   // Disaccord PassWord
-  public static void printDisaccordPW() { System.out.println("[비밀번호가 잘못되었습니다.]"); }
+  public static void printDisaccordPW() {
+    System.out.println("[비밀번호가 잘못되었습니다.]");
+    loading(1000);
+  }
 
   // Disaccord ID
-  public static void printDisaccordID() { System.out.println("[존재하지 않는 사용자입니다.]"); }
+  public static void printDisaccordID() {
+    System.out.println("[존재하지 않는 사용자입니다.]");
+    loading(1000);
+  }
 
   // Disaccord LogIn
-  public static void printDisaccordLogin() { System.out.println("[ID PW를 다시 확인해주세요.]\n\n"); }
+  public static void printDisaccordLogin() {
+    System.out.println("[ID PW를 다시 확인해주세요.]\n\n");
+    loading(1000);
+  }
 
   //Success LogIn
   public static void printSuccessLogin() {

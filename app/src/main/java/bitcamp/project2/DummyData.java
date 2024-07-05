@@ -139,6 +139,7 @@ public class DummyData {
 
 
         AppointmentController.getInstance().setAppointmentList(appointmentList);
+        AppointmentController.getInstance().sortAppointment();
     }
 
 }//Class DummyData END
