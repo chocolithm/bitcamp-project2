@@ -1,5 +1,6 @@
 package bitcamp.project2.controller;
 
+import bitcamp.project2.util.Membership;
 import bitcamp.project2.util.Prompt;
 import bitcamp.project2.vo.User;
 
@@ -118,6 +119,9 @@ public class UserController {
                         String newName = Prompt.input("'%s'님 이름 변경 : ", oldName);
                         user.setName(newName);
                         AppointmentController.getInstance().updateUserName(oldName, newName);
+                        if(Membership.getInstance().getName().equals(oldName)) {
+                            Membership.getInstance().setName(newName);
+                        }
                         System.out.println("수정되었습니다.\n");
                         loading(1000);
                         break;

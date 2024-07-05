@@ -272,14 +272,15 @@ public class AppointmentController {
         appointment += " ( ";
 
         for(String str : memberList) {
-            appointment += str + " ";
+            appointment += str + ", ";
             User user = uc.getUserByName(str);
             LinkedList<Plan> planList = user.getPlanList();
             planList.add(plan);
             user.setPlanList(planList);
         }
 
-        appointment += ")";
+        appointment = appointment.substring(0, appointment.length() - 2);
+        appointment += " )";
         appointmentList.add(appointment);
         appointment = "";
 
@@ -370,6 +371,8 @@ public class AppointmentController {
         for(int i = 0; i < appointmentList.size(); i++) {
             if(appointmentList.get(i).contains(oldName)) {
                 appointmentList.set(i, appointmentList.get(i).replace(oldName, newName));
+                appointmentList.set(i, appointmentList.get(i).replace(" , ", " "));
+                appointmentList.set(i, appointmentList.get(i).replace(",  ", " "));
             }
         }
     }
