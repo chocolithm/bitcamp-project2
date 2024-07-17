@@ -1,272 +1,113 @@
-# bitcamp-project2
-- 주제 : To-Do 리스트
-  팀원 : 이선아, 강윤상
-
-추가할 기능?
-  - 태그를 활용해서 다른사람 일정 검색?
-  - 반복일정 등록
-  - 가까운 일정 알림
-
-
-Package util
-  ## Class Prompt
-
-Package vo
-  ## Class User
-  String name;
-  String password;
-  Date joinDate;
-  LinkedList planList;
-
-  ## Class Plan
-  int no;
-  String title;
-  Date startDate;
-  Date dueDate;
-  String repeatedDays;
-
-Package controller
-  ## Class UserController
-  LinkedList userList;
-  LinkedList planList;
-  addUser()
-  listUser()
-  updateUser()
-  deleteUser()
-  addPlan()
-  getUserList()
-
-  ## Class PlanController
-  static User loginUser;
-  LinkedList planList;
-  addPlan()
-  listPlan()
-  viewPlan()
-  updatePlan()
-  deletePlan()
-  getPlanListByUser()
-  getAvailableDates()
-
-
---- 화면예시 ---
-
-1. 사용자 관리
-  관리자 체크
-  1) 사용자 등록
-  2) 사용자 목록
-  3) 사용자 수정
-  4) 사용자 삭제
-  9) 이전
-
-2. 일정 관리
-  로그인 체크
-  1) 일정 등록
-  2) 일정 목록
-  3) 일정 수정
-  4) 일정 삭제
-  9) 로그아웃
-
-3. 약속잡기
-  대상자 입력
-  찾을 기간
-  빈 시간 계산 (... 로딩화면)
-  목록 나열
-
-4. 종료
-
----------------------------------------------------------------------
-[야!먹자]
-[1] 로그인    [2] 회원가입
-메인>
-
-메인> 1
-## [login]
-ID? 선아
-PW? 0000
-로그인 되었습니다.
-
-메인> 2
-[회원가입]
-ID : 윤상
-PW : 0000
-등록되었습니다.
-
-
-
-# 메인메뉴
----------------------------------------
-	<<야이날에먹자>>
-	-7.10-7.12(선아, 윤상)
-	-7.13(지영, 지윤, 미지)
----------------------------------------
-[1] 내 일정      [2] 약속 추가      [3] 사용자관리     [0] 종료
+# 야! 밥한번 먹자
+<img src="README_images/Logo.png" alt="로고">
 
-/*************************************************************/
-선아: login 화면, App.java에 sys.out.prinln(id, pw), TUI
-윤상: APP.java (final int ans =3) ->user control
-/*************************************************************/
-메인>
+### 프로젝트 소개
+- 주제 : TO-DO List CLI 프로그램
+  - 비트캠프 미니프로젝트 2
+  - 개인 및 지인들과의 밥약속 일정을 관리하는 프로그램
+- 개발기간 : 2024-07-01 ~ 2024-07-05
 
 
-# 일정관리
-메인> 1
+### 개발팀
+- (NAVER Cloud) 클라우드 기반 웹 데브옵스 프로젝트 개발자 과정 14기
+- 공통 : 설계, 테스트, 리팩터링
+- chocolithm (algo-itthm)
+  - User(사용자) / Plan(일정) 기능 구현
+  - Appointment(약속추가) 기능 공동 구현
+- SA030
+  - Login / Menu / Prompt(공통출력) 기능 구현
+  - Appointment(약속추가) 기능 공동 구현
+  - TUI 및 Dummy Data
 
----------------------------------------------------------------------
-No   : Title                           : Date
-1.
-2.
----------------------------------------------------------------------
+<!-- 
+  프로젝트 로고, 배포 주소
+https://velog.io/@luna7182/%EB%B0%B1%EC%97%94%EB%93%9C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-README-%EC%93%B0%EB%8A%94-%EB%B2%95
+ -->
 
-[1] 등록    [2] 수정    [3] 삭제  [0] 이전
 
+<br><br>
+# 시작 가이드
 
-## 등록
-메인/일정관리> 1
+### Requirements
+- JDK 21
 
-[등록]
-제목 : 미니프로젝트2
-월? 7
-7월
-월  화  수  목  금  토  일
-1   2   3   4   5    6   7
-.
-.
-.
-일?(1~31 매주 월수금)) 1~31 월수금
-등록되었습니다.
+### Installation
+```
+$ git clone "https://github.com/chocolithm/bitcamp-project2"
+$ cd bitcamp-project2
+```
 
-메인/일정관리>
----------------------------------------------------------------------
-No   : Title                           : Date
-1.    미니프로젝트2                      07.01-07.31 월수금
-2.    미니프로젝트3                      07.23
----------------------------------------------------------------------
+### Run
+```
+$ java -cp app/bin/main bitcamp.project2.App
+```
 
-[1] 등록    [2] 수정    [3] 삭제   [0] 이전  
+<!-- Backend, Frontend -->
 
 
-## 일정 수정
-메인/일정관리> 3
 
-[일정 수정]
-수정할 일정 : 1
+<br><br>
+# 기술 스택
+<!-- https://github.com/Ileriayo/markdown-badges?tab=readme-ov-file#badges -->
 
-1) 제목
-2) 기간
-수정할 항목 : 1
-'미니프로젝트2' 제목 변경 : 미니프로젝트
-수정할 항목 : 2
-월?) 7월
-7월
-월  화  수  목  금  토  일
-1   2   3   4   5    6   7
-.
-.
-.
-일?(1~31 매주 월수금)) 1~31 월수금
-수정되었습니다.
+### Environment
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
 
-메인/일정관리>
+### Development
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
+### Communication
+![KakaoTalk](https://img.shields.io/badge/kakaotalk-ffcd00.svg?style=for-the-badge&logo=kakaotalk&logoColor=000000)
+<!-- 상황에 따라 config, test, deploy 등 추가 -->
 
-## 일정 삭제
-메인/일정관리> 4
 
-[일정 삭제]
-삭제할 일정 : 1
-'미니프로젝트2' 일정을 삭제하시겠습니까? (y/n) : y
-'미니프로젝트2' 일정을 삭제했습니다.
+<br><br>
+# 주요 기능
 
-메인/일정관리>
+### 개인 일정 관리
+- 제목, 기간, 필요시 반복요일 설정을 통해 일정 관리 가능
 
+### 약속 추가 기능 제공
+- 여러 사용자간 일정이 비어있는 시간을 계산하여 목록으로 제공
 
 
+<br><br>
+# 화면 구성
 
+### 회원가입
+<img src="README_images/join.png" alt="회원가입" width="412" height = "176">
 
-# 약속잡기
-메인> 2
+### 로그인
+<img src="README_images/login.png" alt="로그인" width="422" height = "172">
 
-[약속잡기]
-함께할 사람(0: 다음) : 선아
-'선아' 님을 추가합니다.
-함께할 사람(0: 다음) : 윤상
-'윤상' 님을 추가합니다.
-함께할 사람(0: 다음) : 윤상
-'윤상' 님이 이미 있습니다.
-함께할 사람(0: 다음) : 0
+### 메인 페이지
+<img src="README_images/main.png" alt="메인">
 
-검색할 기간(월) : 7
+### 내 일정
+<img src="README_images/myPlan.png" alt="내 일정">
 
-[가능한 일정 검색중 ...]
+- 등록
+<img src="README_images/myPlan_create.png" alt="내 일정 - 등록">
 
-순위      기간
-1         07-06 ~ 07-13
-2         07-15 ~ 07-18
-...
+- 수정
+<img src="README_images/myPlan_update.png" alt="내 일정 - 수정">
 
-일정을 등록하시겠습니까?(y/n) y
-제목 : 미니프로젝트3
-월?) 7월
+- 삭제
+<img src="README_images/myPlan_delete.png" alt="내 일정 - 삭제">
 
-----------------------------------
-7월
-월  화  수  목  금  토  일
-1   2   3   4   5    6   7
-.
-.
-.
-----------------------------------
-일?(1-31 매주 월수금)) 5~7
+### 약속추가
+<img src="README_images/addAppointment.png" alt="약속추가">
 
-'윤상', '선아' 님 앞으로
-'미니프로젝트3' 일정이 등록되었습니다.
+### 사용자관리
+<img src="README_images/manageUser.png" alt="사용자관리">
 
-메인>
+- 수정
+<img src="README_images/manageUser_update.png" alt="사용자관리">
 
+- 삭제
+<img src="README_images/manageUser_delete.png" alt="사용자관리">
 
 
-
-
-# 사용자관리
-메인> 3
-관리자 비밀번호 : 1111
-비밀번호가 잘못되었습니다.
-
-관리자 비밀번호 : 0000
-[사용자관리 화면에 접속합니다.]
-
----------------------------------------------------------------------
-No   : Name 
-1.     선아                 
-2.     윤상
----------------------------------------------------------------------
-
-[1] 수정    [2] 삭제    [0] 이전
-
-
-## 사용자 수정
-메인/사용자관리> 3
-
-[사용자 수정]
-사용자 번호?> 2
-1) 이름
-2) 비밀번호
-수정할 항목 : 1
-test01 이름 변경 : <<이름 입력>>
-수정할 항목 : 2
-test01 비밀번호 변경 : <<비밀번호 입력>>
-
-수정되었습니다.
-
-메인/사용자관리>
-
-
-## 사용자 삭제
-메인/사용자관리> 4
-
-[사용자 삭제]
-사용자 번호?> 2
-윤상 님을 삭제하시겠습니까?(y/n) : Y
-윤상 님을 삭제했습니다.
-
-메인/사용자관리>
+<!-- 아키텍쳐 구조, 개발 일지, 회고 블로그 링크 -->
