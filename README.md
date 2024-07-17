@@ -66,7 +66,7 @@ $ java -cp app/bin/main bitcamp.project2.App
 
 <!-- 채택한 개발 기술과 브랜치 전략 -->
 
-<br><br.
+<br><br>
 # 3. 프로젝트 구조
 <pre>
 📦src
@@ -114,56 +114,67 @@ $ java -cp app/bin/main bitcamp.project2.App
 ### 회원가입
 - ID 입력 시 중복 검사가 진행되고, 중복일 경우 경고 문구를 출력합니다.
 - 중복 검사를 통과할 경우 비밀번호를 입력받은 후 가입을 완료합니다.
+
 <img src="README_images/join.png" alt="회원가입" width="412" height = "176">
 
 ### 로그인
 - ID를 입력받은 후, 해당하는 ID가 없으면 경고 문구를 출력합니다.
 - ID가 일치하면 PW를 입력받은 후, 일치하면 로그인에 성공하여 메인으로 이동합니다.
+
 <img src="README_images/login.png" alt="로그인" width="422" height = "172">
 
 ### 메인
 - 메인화면 로고 하단에 약속 목록을 출력합니다.
 - 번호를 통해 각 메뉴로 이동할 수 있습니다.
+
 <img src="README_images/main.png" alt="메인">
 
 ### 내 일정
 - 등록되어 있는 개인 일정 목록을 출력합니다.
 - 번호를 통해 각 메뉴로 이동할 수 있습니다.
+
 <img src="README_images/myPlan.png" alt="내 일정">
 
 [등록]
 - 제목과 약속을 잡을 월을 입력받은 후, 해당 월의 달력을 출력합니다. (연도는 2024 고정)
 - 달력을 참고하여 원하는 날짜나 기간, 필요하면 반복할 요일을 dd-dd day 형식으로 입력하여 등록합니다.
-<img src="README_images/myPlan_create.png" alt="내 일정 - 등록">
+
+<img src="README_images/myPlan_add.png" alt="내 일정 - 등록">
 
 [수정]
 - 수정할 일정 및 항목을 선택한 후 재설정합니다.
+
 <img src="README_images/myPlan_update.png" alt="내 일정 - 수정">
 
 [삭제]
 - 삭제할 일정을 선택하면 1회 재확인 후 삭제합니다.
+
 <img src="README_images/myPlan_delete.png" alt="내 일정 - 삭제">
 
 ### 약속추가
 - 여러 사용자를 입력한 후, 약속이 가능한 기간을 계산하는 출력하는 기능입니다.
 - '함께 할 사람'과 '검색할 기간'을 입력하면, 해당 월에서 입력받은 사용자가 모두 약속이 가능한 일정을 목록으로 보여줍니다.
 - 이후 일정을 바로 등록하고자 한다면 y 및 기간을 입력하여 등록합니다.
+
 <img src="README_images/addAppointment.png" alt="약속추가">
 
 ### 사용자관리
 - 관리자 비밀번호를 확인한 후, 비밀번호가 일치하면 사용자관리 화면으로 이동합니다.
 - 사용자에 대한 수정, 삭제를 수행할 수 있습니다.
+
 <img src="README_images/manageUser.png" alt="사용자관리">
 
 [수정]
 - 수정할 사용자 및 항목을 선택한 후 재설정합니다.
+
 <img src="README_images/manageUser_update.png" alt="사용자관리">
 
 [삭제]
 - 삭제할 사용자를 선택하면 1회 재확인 후 삭제합니다.
 - 삭제한 사용자는 메인 화면의 약속 목록에서 사라집니다.
 - 로그인한 사용자 본인을 삭제하려 하면 경고 문구를 출력합니다.
+
 <img src="README_images/manageUser_delete.png" alt="사용자관리">
 
 
-<!-- 아키텍쳐 구조, 개발 일지, 회고 블로그 링크 -->
+<!-- 아키텍쳐 구조, 개발 일지, 회고 블로그 링크, 트러블 슈팅, 개선 목표, 후기 -->
