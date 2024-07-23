@@ -1,5 +1,5 @@
 # 야! 밥한번 먹자
-<img src="README_images/Logo.png" alt="로고">
+<img src="README_images/logo.png" alt="로고">
 
 ### 프로젝트 소개
 - 주제 : TO-DO List CLI 프로그램
